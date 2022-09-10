@@ -2,8 +2,10 @@ const React = require('react');
 const Head = require('react-declarative-head');
 const Icon = require('../../components/assets/appIcon.png');
 
+
+
 const View = () => {
-  return (<div className="App">
+  return <div>
     <Head>
       <title>MiaPortal | LOGIN</title>
       <link rel="icon" href={Icon}></link>
@@ -12,7 +14,7 @@ const View = () => {
     <p>
       LOGIN
     </p>
-  </div>);
+  </div>;
 }
 
 module.exports = { View };
