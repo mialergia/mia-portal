@@ -12,7 +12,7 @@ const View = () => {
     </Head>
     <img src={Icon}></img>
     <p>
-      LOGIN
+      LOGIN PAGE
     </p>
   </div>;
 }
