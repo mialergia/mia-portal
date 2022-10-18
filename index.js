@@ -20,6 +20,7 @@ require.extensions['.svg'] = () => { };
 
 const loginRoute = require('./src/pages/login');
 const registerRoute = require('./src/pages/registerUser');
+const reportsRoute = require('./src/pages/reports');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -30,6 +31,7 @@ app.use(express.static(DIST_DIR));
 app.get('/', (req, res) => res.redirect(`/login`));
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.use('/reports', reportsRoute);
 
 app.listen(port, function () {
     console.log('App listening on port: ' + port);
