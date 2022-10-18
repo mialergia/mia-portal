@@ -5,7 +5,8 @@ const path = require('path');
 module.exports = {
     entry: {
         login: "./src/client/login.js",
-        register: "./src/client/registerUser.js"
+        register: "./src/client/registerUser.js",
+        reports: "./src/client/reports.js",
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -22,6 +23,11 @@ module.exports = {
             template: "./src/index.html",
             filename: "./register/index.html",
             chunks: ['register']
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "./reports/index.html",
+            chunks: ['reports']
         }),
         new MiniCssExtractPlugin({
             filename: "[name].css",

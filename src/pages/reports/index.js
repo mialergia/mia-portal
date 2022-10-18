@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { View } = require('./view');
 
-router.get('/login', View);
+router.get('/reports', View);
 
 module.exports = router;

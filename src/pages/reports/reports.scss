@@ -4,7 +4,6 @@ body {
     font-family: 'Nunito', Tahoma, Arial, sans-serif;
     font-size: 18px;
     color: #2b374d;
-    padding-top: 110px;
     background: #fff;
     text-align: center;
 }
@@ -12,5 +11,14 @@ body {
 .main-section {
     max-width: 1392px;
     margin: 0 auto;
+}
+
+.reports {
+    min-height: 1500px;
+}
+
+.reports-iframe {
+    margin-top: 32px;
+    min-height: 1800px;
 }
 
