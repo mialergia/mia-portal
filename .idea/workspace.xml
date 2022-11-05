@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef2e4a04-4075-405d-a3c7-60bb51e1e31e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/assets/mialergia-fondo.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/common.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/login/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/login.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/login/view.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/view.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/registerUser/register_user.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/registerUser/register_user.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/registerUser/view.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/registerUser/view.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +98,7 @@
       <option name="presentableId" value="Default" />
       <updated>1666133100272</updated>
       <workItem from="1666133101970" duration="599000" />
-      <workItem from="1667421691295" duration="7754000" />
+      <workItem from="1667421691295" duration="10482000" />
     </task>
     <servers />
   </component>
