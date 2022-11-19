@@ -26,12 +26,8 @@ const NavBar = ({ onChangeMenuSelection }) => {
               onSelect={(e, ev) => onChangeMenuSelection(e, ev)}
             >
               <NavDropdown.Item eventKey="tipo" value="tipo">Por tipo</NavDropdown.Item>
-              <NavDropdown.Item eventKey="diario" value="diario">
-                Reporte Diario
-              </NavDropdown.Item>
-              <NavDropdown.Item eventKey="meteoro" value="diario">
-                Meteorológicos
-              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="diario" value="diario">Reporte Diario</NavDropdown.Item>
+              <NavDropdown.Item eventKey="meteorologico" value="meteorologico">Meteorológicos</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

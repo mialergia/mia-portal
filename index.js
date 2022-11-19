@@ -23,7 +23,7 @@ const registerRoute = require('./src/pages/registerUser');
 const reportsRoute = require('./src/pages/reports');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 const DIST_DIR = path.join(__dirname, './dist');
 
 app.use(express.static(DIST_DIR));

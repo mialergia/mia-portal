@@ -2,18 +2,21 @@ const React = require('react');
 const Head = require('react-declarative-head');
 const Icon = require('../../components/assets/appIcon.png');
 
+const { NavBar } = require("../../components/navBar");
+
 const { Button, Form, Dropdown, DropdownButton } = require("react-bootstrap");
 
 const View = () => {
   return (<div className="App">
+    <NavBar />
     <Head>
       <title>MiaPortal | REGISTRAR USUARIO</title>
       <link rel="icon" href={Icon}></link>
     </Head>
     <div className="register__container">
-      <p>
+      <h2 className='title'>
         REGISTRAR NUEVO USUARIO
-      </p>
+      </h2>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Ingrese el correo electronico del usuario que quiere registrar</Form.Label>

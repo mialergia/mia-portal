@@ -5,6 +5,22 @@ const Background = require("../../components/assets/mialergia-fondo.jpeg");
 
 const { Button, Form } = require("react-bootstrap");
 
+var raw = JSON.stringify({
+  "user": "ale@gmail.com",
+  "password": 123
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE, PUT",
+    "Access-Control-Allow-Headers": "append,delete,entries,foreach,get,has,keys,set,values,Authorization"
+  },
+  body: raw,
+};
+
 const View = () => {
   return (
     <div className="main-section">
@@ -27,7 +43,12 @@ const View = () => {
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" placeholder="Contraseña" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" onClick={() => {
+              fetch("http://localhost:8080/users/login", requestOptions)
+                .then(response => console.log(result))
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+            }}>
               Ingresar
             </Button>
           </Form>

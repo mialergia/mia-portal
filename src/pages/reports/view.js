@@ -6,21 +6,25 @@ const { NavBar } = require("../../components/navBar");
 
 const Icon = require("../../components/assets/appIcon.png");
 
+const REPORTE_POR_TIPO = "https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3yy9piaryc";
+const REPORTE_DIARIO = 'https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_v1pwonityc';
+const REPORTE_DIARIO_METEOROLOGICO = 'https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_z0rfvkkuyc';
+
 const View = () => {
-  const [iframSrc, setIframeSrc] = useState(null);
+  const [iframSrc, setIframeSrc] = useState(REPORTE_POR_TIPO);
+  const [title, setTitle] = useState('Reporte por tipo');
 
   const onChangeMenuSelection = (e) => {
-    console.log(e);
     if (e === 'tipo') {
-      setIframeSrc(
-        "https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3yy9piaryc"
-      );
-    } else  if (e === 'diario') {
-      setIframeSrc('https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_v1pwonityc');
+      setIframeSrc(REPORTE_POR_TIPO);
+      setTitle('Reporte por tipo');
+    } else if (e === 'diario') {
+      setIframeSrc(REPORTE_DIARIO);
+      setTitle('Reporte diario');
     } else {
-      setIframeSrc('https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_z0rfvkkuyc')
+      setIframeSrc(REPORTE_DIARIO_METEOROLOGICO)
+      setTitle('Reporte por diario + meteorológico');
     }
-    
   };
 
   return (
@@ -31,6 +35,8 @@ const View = () => {
           <title>MiaPortal | LOGIN</title>
           <link rel="icon" href={Icon}></link>
         </Head>
+
+        <h1>{title}</h1>
 
         {iframSrc && (
           <iframe
