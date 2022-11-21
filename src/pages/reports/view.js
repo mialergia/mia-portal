@@ -7,7 +7,7 @@ const { NavBar } = require("../../components/navBar");
 const Icon = require("../../components/assets/appIcon.png");
 
 const View = () => {
-  const [iframSrc, setIframeSrc] = useState(null);
+  const [iframSrc, setIframeSrc] = useState("https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3yy9piaryc");
 
   const onChangeMenuSelection = (e) => {
     console.log(e);
