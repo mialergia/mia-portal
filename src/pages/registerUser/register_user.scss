@@ -1,3 +1,32 @@
 @import '../../styles/common.scss';
 
+.register__container {
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
 
+.register__content {
+  width: 65%;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 1px 3px 0 rgb(168 168 168 / 50%);
+  border-radius: 6px;
+  padding: 16px 32px;
+}
+
+.register__title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 auto;
+}
+
+.register__image {
+  margin: 16px auto;
+  width: 100px;
+}
+
+.register__select {
+  margin: 16px auto;
+}

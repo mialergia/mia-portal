@@ -10,13 +10,13 @@ const View = () => {
     <div className="main-section">
       <Head>
         <title>MiaPortal | LOGIN</title>
-        <link rel="icon" href={Icon}></link>
+        <link rel="icon" href={Icon}/>
       </Head>
 
       <div className="login__container">
-        <img className="login__background-image" src={Background}></img>
+        <img className="login__background-image" src={Background}/>
         <div className="login__right-container">
-          <img src={Icon}></img>
+          <img src={Icon}/>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
