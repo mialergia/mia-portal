@@ -12,12 +12,6 @@ var raw = JSON.stringify({
 
 var requestOptions = {
   method: 'POST',
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE, PUT",
-    "Access-Control-Allow-Headers": "append,delete,entries,foreach,get,has,keys,set,values,Authorization"
-  },
   body: raw,
 };
 
