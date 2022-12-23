@@ -36,8 +36,6 @@ const View = () => {
           <link rel="icon" href={Icon}></link>
         </Head>
 
-        <h1>{title}</h1>
-
         {iframSrc && (
           <iframe
             className="reports-iframe"
