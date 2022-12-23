@@ -6,6 +6,16 @@ const Background = require("../../components/assets/mialergia-fondo.jpeg");
 
 const { Button, Form } = require("react-bootstrap");
 
+var raw = JSON.stringify({
+  "user": "ale@gmail.com",
+  "password": 123
+});
+
+var requestOptions = {
+  method: 'POST',
+  body: raw,
+};
+
 const View = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,11 +54,11 @@ const View = () => {
     <div className="main-section">
       <Head>
         <title>MiaPortal | LOGIN</title>
-        <link rel="icon" href={Icon}></link>
+        <link rel="icon" href={Icon}/>
       </Head>
 
       <div className="login__container">
-        <img className="login__background-image" src={Background}></img>
+        <img className="login__background-image" src={Background}/>
         <div className="login__right-container">
           <img src={Icon}></img>
           <h1 className="title">MIAPortal</h1>

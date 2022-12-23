@@ -36,12 +36,12 @@ const View = () => {
           <link rel="icon" href={Icon}></link>
         </Head>
 
-        {iframSrc && (
+        {iframeSrc && (
           <iframe
             className="reports-iframe"
             width="100%"
             height="100%"
-            src={iframSrc}
+            src={iframeSrc}
           />
         )}
       </div>
