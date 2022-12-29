@@ -18,7 +18,7 @@ const View = () => {
     <NavBar />
     <Head>
       <title>MiaPortal | REGISTRAR USUARIO</title>
-      <link rel="icon" href={Icon}/>
+      <link rel="icon" href={Icon} />
     </Head>
     <div className="register__container">
       <h2 className='title'>
@@ -30,29 +30,28 @@ const View = () => {
           <Form.Control type="email" placeholder="Email" />
         </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control type="password" placeholder="Contraseña" />
-          </Form.Group>
-          <Dropdown className="register__select" onSelect={eventKey => setRole(eventKey)}>
-            <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-              {role ? roles[role] : 'Elija el rol del usuario'}
-            </Dropdown.Toggle>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control type="password" placeholder="Contraseña" />
+        </Form.Group>
+        <Dropdown className="register__select" onSelect={eventKey => setRole(eventKey)}>
+          <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+            {role ? roles[role] : 'Elija el rol del usuario'}
+          </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item eventKey="medico" active={role === 'medico'}>Médico</Dropdown.Item>
-              <Dropdown.Item eventKey="investigador" active={role === 'investigador'}>Investigador</Dropdown.Item>
-              <Dropdown.Item eventKey="admin" active={role === 'admin'}>Administrador</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Button variant="primary" type="submit">
-            Registrar usuario
-          </Button>
-        </Form>
-      </div>
+          <Dropdown.Menu>
+            <Dropdown.Item eventKey="medico" active={role === 'medico'}>Médico</Dropdown.Item>
+            <Dropdown.Item eventKey="investigador" active={role === 'investigador'}>Investigador</Dropdown.Item>
+            <Dropdown.Item eventKey="admin" active={role === 'admin'}>Administrador</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Button variant="primary" type="submit">
+          Registrar usuario
+        </Button>
+      </Form>
     </div>
-
-  </div>);
+  </div>
+  );
 }
 
 module.exports = { View };
