@@ -29,6 +29,16 @@ const NavBar = ({ onChangeMenuSelection }) => {
               <NavDropdown.Item eventKey="diario" value="diario">Reporte Diario</NavDropdown.Item>
               <NavDropdown.Item eventKey="meteorologico" value="meteorologico">Meteorológicos</NavDropdown.Item>
             </NavDropdown>
+
+            <NavDropdown
+              title="Pacientes"
+              id="basic-nav-dropdown"
+              onSelect={(e, ev) => onChangeMenuSelection(e, ev)}
+            >
+              <NavDropdown.Item eventKey="sintomas-cronicos" value="sintomas-cronicos">Síntomas crónicos</NavDropdown.Item>
+              <NavDropdown.Item eventKey="entrada-diaria" value="entrada-diaria">Entrada Diaria</NavDropdown.Item>
+              <NavDropdown.Item eventKey="test-prick" value="test-prick">Test Prick</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -7,6 +7,7 @@ module.exports = {
         login: "./src/client/login.js",
         register: "./src/client/registerUser.js",
         reports: "./src/client/reports.js",
+        patients: "./src/client/patients.js",
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -28,6 +29,11 @@ module.exports = {
             template: "./src/index.html",
             filename: "./reports/index.html",
             chunks: ['reports']
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: "./patients/index.html",
+            chunks: ['patients']
         }),
         new MiniCssExtractPlugin({
             filename: "[name].css",

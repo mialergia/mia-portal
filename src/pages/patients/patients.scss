@@ -14,21 +14,17 @@ body {
     margin: 0 auto;
 }
 
-.reports {
+.patients {
     min-height: 1500px;
 }
 
-.reports-iframe {
+.patients-iframe {
     margin-top: 32px;
     min-height: 1800px;
 }
 
 @media (max-width: 768px) {
-    .reports-iframe {
+    .patients-iframe {
         margin: 0;
     }
-}
-
-.ng-star-inserted {
-    display: none !important;
 }

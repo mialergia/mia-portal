@@ -13,7 +13,7 @@ const roles = {
   admin: 'Administrador',
 }
 
-const View = () => {
+const View = ({role}) => {
   return (<div className="App">
     <NavBar />
     <Head>

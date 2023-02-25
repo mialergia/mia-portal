@@ -21,6 +21,7 @@ require.extensions['.svg'] = () => { };
 const loginRoute = require('./src/pages/login');
 const registerRoute = require('./src/pages/registerUser');
 const reportsRoute = require('./src/pages/reports');
+const patientsRoute = require('./src/pages/patients');
 
 const app = express();
 const port = 3000;
@@ -32,6 +33,7 @@ app.get('/', (req, res) => res.redirect(`/login`));
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/reports', reportsRoute);
+app.use('/patients', patientsRoute);
 
 app.listen(port, function () {
     console.log('App listening on port: ' + port);
