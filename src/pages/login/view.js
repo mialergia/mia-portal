@@ -54,11 +54,11 @@ const View = () => {
     <div className="main-section">
       <Head>
         <title>MiaPortal | LOGIN</title>
-        <link rel="icon" href={Icon}/>
+        <link rel="icon" href={Icon} />
       </Head>
 
       <div className="login__container">
-        <img className="login__background-image" src={Background}/>
+        <img className="login__background-image" src={Background} />
         <div className="login__right-container">
           <img src={Icon}></img>
           <h1 className="title">MIAPortal</h1>

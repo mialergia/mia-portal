@@ -16,9 +16,10 @@ body {
 
 .patients {
     min-height: 1500px;
+    position: relative;
 }
 
-.patients-iframe {
+.reports-iframe {
     margin-top: 32px;
     min-height: 1800px;
 }
