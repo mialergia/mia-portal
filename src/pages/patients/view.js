@@ -3,6 +3,7 @@ const { useState } = require("react");
 const Head = require("react-declarative-head");
 
 const { NavBar } = require("../../components/navBar");
+const Iframe = require("../../components/iframe");
 
 const Icon = require("../../components/assets/appIcon.png");
 
@@ -19,8 +20,10 @@ const View = () => {
   const innerWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
   const isMobile = innerWidth < 768;
   const [iframeSrc, setIframeSrc] = useState(isMobile ? MOBILE_REPORTE_SINTOMAS_CRONICOS : DESKTOP_REPORTE_SINTOMAS_CRONICOS);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const onChangeMenuSelection = (e) => {
+    setShowSpinner(true);
     if (e === 'sintomas-cronicos') {
       setIframeSrc(isMobile ? MOBILE_REPORTE_SINTOMAS_CRONICOS : DESKTOP_REPORTE_SINTOMAS_CRONICOS);
     } else if (e === 'entrada-diaria') {
@@ -38,15 +41,7 @@ const View = () => {
           <title>MiaPortal | LOGIN</title>
           <link rel="icon" href={Icon}></link>
         </Head>
-
-        {iframeSrc && (
-          <iframe
-            className="patients-iframe"
-            width="100%"
-            height="100%"
-            src={iframeSrc}
-          />
-        )}
+        <Iframe iframeSrc={iframeSrc} setShowSpinner={setShowSpinner} />
       </div>
     </>
   );
