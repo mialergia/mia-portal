@@ -27,13 +27,15 @@ const app = express();
 const port = 3000;
 const DIST_DIR = path.join(__dirname, './dist');
 
-app.use(express.static(DIST_DIR));
-
-app.get('/', (req, res) => res.redirect(`/login`));
-app.use('/login', loginRoute);
+app.use('/login', (req, res, next) => {
+    console.log('Request URL:', req.originalUrl);
+    next();
+}, loginRoute);
 app.use('/register', registerRoute);
 app.use('/reports', reportsRoute);
 app.use('/patients', patientsRoute);
+
+app.use('/', (req, res) => res.redirect(`/login`));
 
 app.listen(port, function () {
     console.log('App listening on port: ' + port);
