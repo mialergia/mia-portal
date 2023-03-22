@@ -2,7 +2,20 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
+const getPlugins = (page) => {
+    return [
+        new HtmlWebPackPlugin({
+            template: "./src/index.html",
+            filename: `./${page}/index.html`,
+            chunks: [page]
+        })
+    ];
+};
+
 module.exports = {
+    mode: isDevelopment ? 'development' : 'production',
     entry: {
         login: "./src/client/login.js",
         register: "./src/client/registerUser.js",
@@ -15,30 +28,15 @@ module.exports = {
         assetModuleFilename: 'images/[hash][ext][query]'
     },
     plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/index.html",
-            filename: "./login/index.html",
-            chunks: ['login']
-        }),
-        new HtmlWebPackPlugin({
-            template: "./src/index.html",
-            filename: "./register/index.html",
-            chunks: ['register']
-        }),
-        new HtmlWebPackPlugin({
-            template: "./src/index.html",
-            filename: "./reports/index.html",
-            chunks: ['reports']
-        }),
-        new HtmlWebPackPlugin({
-            template: "./src/index.html",
-            filename: "./patients/index.html",
-            chunks: ['patients']
-        }),
+        ...getPlugins('login'),
+        ...getPlugins('register'),
+        ...getPlugins('reports'),
+        ...getPlugins('patients'),
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css",
-        })],
+        })
+    ],
     module: {
         rules: [
             {
@@ -50,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader",],
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
@@ -59,23 +57,7 @@ module.exports = {
         ]
     },
     resolve: {
-        fallback: {
-            "fs": false,
-            "tls": false,
-            "net": false,
-            "path": false,
-            "zlib": false,
-            "http": false,
-            "https": false,
-            "stream": false,
-            "crypto": false,
-            "querystring": false,
-            "url": false,
-            "buffer": false,
-            "util": false,
-            "string_decoder": false,
-            "async_hooks": false
-        },
         extensions: ['.js', '.json', '.png'],
     },
+    devtool: isDevelopment ? 'inline-source-map' : undefined,
 };

@@ -20,6 +20,9 @@ const View = ({role}) => {
       <title>MiaPortal | REGISTRAR USUARIO</title>
       <link rel="icon" href={Icon} />
     </Head>
+    <script src="register.js"></script>
+    <link href="register.css" rel="stylesheet" type="text/css" />
+
     <div className="register__container">
       <h2 className='title'>
         REGISTRAR NUEVO USUARIO

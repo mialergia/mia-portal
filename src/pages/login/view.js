@@ -1,5 +1,5 @@
 const React = require("react");
-// const { useState } = React;
+const { useState } = React;
 const Head = require("react-declarative-head");
 const Icon = require("../../components/assets/appIcon.png");
 const Background = require("../../components/assets/mialergia-fondo.jpeg");
@@ -29,6 +29,7 @@ const View = () => {
       }).then((data) => {
         if (data.login) {
           window.location.href = '/reports'
+          document.cookie = `user=${email}`;
         } else {
           setError('Email o contraseña inválida')
         }
@@ -47,6 +48,8 @@ const View = () => {
         <title>MiaPortal | LOGIN</title>
         <link rel="icon" href={Icon} />
       </Head>
+      <script src="login.js"></script>
+      <link href="login.css" rel="stylesheet" type="text/css" />
 
       <div className="login__container">
         <img className="login__background-image" src={Background} />
@@ -54,7 +57,7 @@ const View = () => {
           <img src={Icon}></img>
           <h1 className="title">MIAPortal</h1>
           <Form>
-            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" placeholder="Email" onChange={(e) => {
                 setError('')
@@ -72,11 +75,11 @@ const View = () => {
 
             <div className="error_message">
               <p>{error}</p>
-            </div> */}
+            </div>
 
-            {/* <Button variant="primary" onClick={() => doSubmit()}>
+            <Button variant="primary" onClick={() => doSubmit()}>
               Ingresar
-            </Button> */}
+            </Button>
           </Form>
         </div>
       </div>

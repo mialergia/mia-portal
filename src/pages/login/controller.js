@@ -1,6 +1,8 @@
 const React = require('react');
+const ReactDOMServer = require('react-dom/server')
 const { View } = require('./view');
 
 exports.render = (req, res) => {
-    res.render(View, {});
+    const html = ReactDOMServer.renderToString(<View />);
+    res.send(html);
 };

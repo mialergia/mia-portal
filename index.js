@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const cookieParser = require('cookie-parser');
 
 require('@babel/register')({
     ignore: ['node_modules'],
@@ -25,10 +25,15 @@ const patientsRoute = require('./src/pages/patients');
 
 const app = express();
 const port = 3000;
-const DIST_DIR = path.join(__dirname, './dist');
 
-app.use('/login', (req, res, next) => {
-    console.log('Request URL:', req.originalUrl);
+app.use(express.static('dist'));
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+    next();
+});
+
+app.use('/login', (req, res, next) => { 
     next();
 }, loginRoute);
 app.use('/register', registerRoute);
