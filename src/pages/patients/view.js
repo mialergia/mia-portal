@@ -41,6 +41,8 @@ const View = () => {
           <title>MiaPortal | LOGIN</title>
           <link rel="icon" href={Icon}></link>
         </Head>
+        <script src="patients.js"></script>
+        <link href="patients.css" rel="stylesheet" type="text/css" />
         <Iframe iframeSrc={iframeSrc} setShowSpinner={setShowSpinner} />
       </div>
     </>

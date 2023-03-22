@@ -4,7 +4,7 @@ const Icon = require("../../components/assets/appIcon.png");
 
 const NavBar = ({ onChangeMenuSelection }) => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
       <Container>
         <Navbar.Brand href="#home">
           <img
