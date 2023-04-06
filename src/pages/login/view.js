@@ -4,13 +4,13 @@ const Head = require("react-declarative-head");
 const Icon = require("../../components/assets/appIcon.png");
 const Background = require("../../components/assets/mialergia-fondo.jpeg");
 
-const { Button, Form } = require("react-bootstrap");
+const { Button, Form, Alert } = require("react-bootstrap");
 const Cookies = require('js-cookie');
 
 const View = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(' ');
+  const [feedbackMessage, setFeedbackMessage] = useState({})
   
   const saveUserData = (user, features) => {
     const userInfo = {
@@ -25,7 +25,7 @@ const View = () => {
 
   const doSubmit = async () => {
     if (email && password) {
-      setError(' ')
+      setFeedbackMessage(' ')
       await fetch("http://localhost:8080/users/login", {
         method: 'POST',
         headers: {
@@ -42,14 +42,14 @@ const View = () => {
           saveUserData(email, data.features);
           window.location.href = '/reports';
         } else {
-          setError('Email o contraseña inválida')
+          setFeedbackMessage({ variant: 'danger', message: 'Email o contraseña inválida'})
         }
       }).catch(error => {
-        setError('No se pudo iniciar sesión. Intente nuevamente.')
+        setFeedbackMessage({ variant: 'danger', message: 'No se pudo iniciar sesión. Intente nuevamente.'})
         console.log('Error en fetch', error)
       });
     } else {
-      setError('Debe ingresar el Email y la Contraseña')
+      setFeedbackMessage({ variant: 'warning', message: 'Debe ingresar el Email y la Contraseña'})
     }
   }
 
@@ -71,7 +71,7 @@ const View = () => {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" placeholder="Email" onChange={(e) => {
-                setError('')
+                setFeedbackMessage({})
                 setEmail(e.target.value)
               }} required isValid={false} />
             </Form.Group>
@@ -79,14 +79,14 @@ const View = () => {
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" placeholder="Contraseña" onChange={(e) => {
-                setError('')
+                setFeedbackMessage({})
                 setPassword(e.target.value)
               }} required />
             </Form.Group>
 
-            <div className="error_message">
-              <p>{error}</p>
-            </div>
+            {feedbackMessage && feedbackMessage.variant && <Alert variant={feedbackMessage.variant}>
+              <p>{feedbackMessage.message}</p>
+            </Alert>}
 
             <Button variant="primary" onClick={() => doSubmit()}>
               Ingresar

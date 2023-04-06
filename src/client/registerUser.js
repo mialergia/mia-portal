@@ -1,7 +1,8 @@
 const React = require('react');
-const ReactDOM = require('react-dom');
+const { View } = require('../pages/registerUser/view');
+import { createRoot } from 'react-dom/client';
 
 require('../pages/registerUser/register_user.scss');
 
-const { View } = require('../pages/registerUser/view');
-ReactDOM.hydrate(<View />, document.getElementById('app'));
+const root = createRoot(document.getElementById('app')); // 
+root.render(<View />);
