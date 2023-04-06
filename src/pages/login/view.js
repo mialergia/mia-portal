@@ -5,12 +5,23 @@ const Icon = require("../../components/assets/appIcon.png");
 const Background = require("../../components/assets/mialergia-fondo.jpeg");
 
 const { Button, Form } = require("react-bootstrap");
-
+const Cookies = require('js-cookie');
 
 const View = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(' ');
+  
+  const saveUserData = (user, features) => {
+    const userInfo = {
+      username: user,
+      roles: features.toString(),
+    };
+    // Guardamos una cookie que dura 2 semanas
+    Cookies.set('userInfo', JSON.stringify(userInfo), 
+      {expires: 14},
+    )
+  };
 
   const doSubmit = async () => {
     if (email && password) {
@@ -28,8 +39,8 @@ const View = () => {
         return response.json();
       }).then((data) => {
         if (data.login) {
-          window.location.href = '/reports'
-          document.cookie = `user=${email}`;
+          saveUserData(email, data.features);
+          window.location.href = '/reports';
         } else {
           setError('Email o contraseña inválida')
         }

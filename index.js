@@ -23,6 +23,8 @@ const registerRoute = require('./src/pages/registerUser');
 const reportsRoute = require('./src/pages/reports');
 const patientsRoute = require('./src/pages/patients');
 
+const auth = require('./src/middlewares/auth');
+
 const app = express();
 const port = 3000;
 
@@ -36,9 +38,9 @@ app.use((req, res, next) => {
 app.use('/login', (req, res, next) => { 
     next();
 }, loginRoute);
-app.use('/register', registerRoute);
-app.use('/reports', reportsRoute);
-app.use('/patients', patientsRoute);
+app.use('/register', auth, registerRoute);
+app.use('/reports', auth, reportsRoute);
+app.use('/patients', auth, patientsRoute);
 
 app.use('/', (req, res) => res.redirect(`/login`));
 
