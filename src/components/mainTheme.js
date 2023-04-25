@@ -24,7 +24,7 @@ function Copyright() {
 let theme = createTheme({
     palette: {
         primary: {
-            light: '#63ccff',
+            light: '#8AC082',
             main: '#8AC082',
             dark: '#69AF62',
         },
@@ -120,7 +120,7 @@ theme = {
         MuiDivider: {
             styleOverrides: {
                 root: {
-                    backgroundColor: 'rgb(255,255,255,0.15)',
+                    backgroundColor: '#69AF62',
                 },
             },
         },
@@ -161,7 +161,7 @@ theme = {
                 },
             },
         },
-        MuiBox: {
+        MuiListItem: {
             styleOverrides: {
                 root: {
                     backgroundColor: '#69AF62',
@@ -173,7 +173,7 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function MainTheme({ children, onChangeMenuSelection }) {
+export default function MainTheme({ children, onChangeMenuSelection, title }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -206,7 +206,7 @@ export default function MainTheme({ children, onChangeMenuSelection }) {
                     />
                 </Box>
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                    <Header onDrawerToggle={handleDrawerToggle} />
+                    <Header onDrawerToggle={handleDrawerToggle} title={title}/>
                     <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
                         {children}
                     </Box>

@@ -1,22 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useUserAuth from '../hooks/useUserAuth';
-import NavBar from '../components/navBar'
+import MainTheme from '../components/mainTheme'
 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 function RegisterUser() {
     const [username, setUsername] = useState('');
@@ -45,11 +43,8 @@ function RegisterUser() {
         }
     };
 
-    const theme = createTheme();
-
-    return (
-        <ThemeProvider theme={theme}>
-            <NavBar></NavBar>
+    return <MainTheme title="Registrar usuario">
+        <div className="main-section reports">
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -60,15 +55,13 @@ function RegisterUser() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Registrar Usuario
-                    </Typography>
+
+                    <svg width="80" height="80" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="12" r="8" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M42 44C42 34.0589 33.9411 26 24 26C14.0589 26 6 34.0589 6 44" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M19 39H29" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M24 34V44" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+
+
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                           
+
                             <Grid item xs={12}>
                                 <TextField
                                     required
@@ -101,7 +94,7 @@ function RegisterUser() {
                                     autoComplete="confirm-password"
                                 />
                             </Grid>
-                            
+
                         </Grid>
                         <Button
                             type="submit"
@@ -109,22 +102,18 @@ function RegisterUser() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Crear
                         </Button>
-                        
+
                     </Box>
                 </Box>
-                <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
-                    {'Copyright © '}
-                    <Link color="inherit" href="https://miaportal.com/">
-                        Mia Portal
-                    </Link>{' '}
-                    {new Date().getFullYear()}
-                    {'.'}
-                </Typography>
+
             </Container>
-        </ThemeProvider>
-    );
+        </div>
+    </MainTheme>;
 }
 
 export default RegisterUser;
+
+
+

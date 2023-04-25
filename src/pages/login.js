@@ -1,19 +1,15 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
+import Image from 'next/Image';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import Cookies  from 'js-cookie';
+import Cookies from 'js-cookie';
 
 const theme = createTheme();
 
@@ -55,19 +51,21 @@ export default function Login() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" sx={{
+                backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "64px auto"
+            }}>
                 <CssBaseline />
                 <Box
                     sx={{
-                        marginTop: 8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        marginTop: '64px',
+                        backgroundColor: '#fff',
+                        borderRadius: '12px'
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
+                    <Image src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" />
                     <Typography component="h1" variant="h5">
                         MIA Portal
                     </Typography>
@@ -100,13 +98,12 @@ export default function Login() {
                         >
                             Entrar
                         </Button>
-                        
+
                     </Box>
                 </Box>
-                
+
 
                 <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
-                    {'Copyright © '}
                     <Link color="inherit" href="https://miaportal.com/">
                         Mia Portal
                     </Link>{' '}

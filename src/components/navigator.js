@@ -68,18 +68,14 @@ export default function Navigator(props) {
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
-                <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
+                <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff', fontWeight: 600, justifyContent: 'space-evenly' }}>
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M12 2L7 6.643S10.042 7 12 7c1.958 0 5-.357 5-.357L12 2zM8.5 7L5 10.94S7.625 12 12 12s7-1.06 7-1.06L15.5 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 11.5L3 15.523S5.7 18 12 18s9-2.477 9-2.477L17.5 11.5M12 22v-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     MIA Portal
                 </ListItem>
-                <ListItem sx={{ ...item, ...itemCategory }}>
-                    <ListItemIcon>
-                        <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText>Inicio</ListItemText>
-                </ListItem>
+                
 
                 <Box sx={{ bgcolor: '#101F33' }}>
-                    <ListItem sx={{ py: 2, px: 3 }}>
+                    <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
                         <ListItemText sx={{ color: '#fff' }}>Reportes</ListItemText>
                     </ListItem>
 
@@ -105,7 +101,7 @@ export default function Navigator(props) {
                 </Box>
 
                 <Box sx={{ bgcolor: '#101F33' }}>
-                    <ListItem sx={{ py: 2, px: 3 }}>
+                    <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
                         <ListItemText sx={{ color: '#fff' }}>Pacientes</ListItemText>
                     </ListItem>
 
