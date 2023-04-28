@@ -30,7 +30,6 @@ button,
 }
 
 .reports-iframe {
-  margin-top: 32px;
   min-height: 1800px;
 }
 
@@ -43,5 +42,10 @@ button,
 }
 
 .css-lalrea {
-  background-color: #69AF62;
+  background-color: #69AF62 !important;
+}
+
+input {
+  background-color: white !important;
+  border-radius: 7px !important;
 }

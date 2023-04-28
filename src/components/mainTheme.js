@@ -12,7 +12,6 @@ import Header from '../components/header';
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © '}
             <Link color="inherit" href="https://miaportal.com/">
                 MIA Portal
             </Link>{' '}
@@ -173,7 +172,7 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function MainTheme({ children, onChangeMenuSelection, title }) {
+export default function MainTheme({ children, onChangeMenuSelection, title, userAuth }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -196,6 +195,7 @@ export default function MainTheme({ children, onChangeMenuSelection, title }) {
                             open={mobileOpen}
                             onClose={handleDrawerToggle}
                             onChangeMenuSelection={onChangeMenuSelection}
+                            userAuth={userAuth}
                         />
                     )}
 
@@ -203,11 +203,12 @@ export default function MainTheme({ children, onChangeMenuSelection, title }) {
                         PaperProps={{ style: { width: drawerWidth } }}
                         sx={{ display: { sm: 'block', xs: 'none' } }}
                         onChangeMenuSelection={onChangeMenuSelection}
+                        userAuth={userAuth}
                     />
                 </Box>
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <Header onDrawerToggle={handleDrawerToggle} title={title}/>
-                    <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
+                    <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1', padding: '16px' }}>
                         {children}
                     </Box>
                     <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
