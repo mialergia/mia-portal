@@ -1,44 +1,68 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 import Iframe from '../components/iframe'
 
-const MOBILE_REPORTE_POR_TIPO = "https://lookerstudio.google.com/s/hC_IB3htfBo"; //MOBILE
-const MOBILE_REPORTE_DIARIO = 'https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_v1pwonityc';
-const MOBILE_REPORTE_DIARIO_METEOROLOGICO = 'https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_z0rfvkkuyc';
+const reports_dictionary = {
+    tipo: {
+        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3yy9piaryc',
+        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_5jryigxq1c'
+    },
+    diario: {
+        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_v1pwonityc',
+        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_w40ygyrq3c'
+    },
+    diario_met: {
+        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_z0rfvkkuyc',
+        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_rvydwyrq3c'
+    },
+    sintomas: {
+        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3pj70dpp0c',
+        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_kxvz4mtq3c' // AJUSTAR
+    },
+    entrada_diaria: {
+        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_qhjuzrqp0c',
+        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_wy8wgntq3c'
+    },
+    test_prick: {
+        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_zo0iy9ur0c',
+        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_bos5mntq3c'
+    },
+}
 
-const DESKTOP_REPORTE_POR_TIPO = "https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac"; //DESKTOP
-const DESKTOP_REPORTE_DIARIO = 'https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_v1pwonityc';
-const DESKTOP_REPORTE_DIARIO_METEOROLOGICO = 'https://datastudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_z0rfvkkuyc';
+const MOBILE = 'mobile';
+const DESKTOP = 'desktop'
+
 
 function Reports() {
     const router = useRouter();
     const userAuth = useUserAuth();
 
-    const innerWidth = 1000//(window.innerWidth > 0) ? window.innerWidth : screen.width;
-    const isMobile = innerWidth < 768;
-    const [iframeSrc, setIframeSrc] = useState(isMobile ? MOBILE_REPORTE_POR_TIPO : DESKTOP_REPORTE_POR_TIPO);
+    const [device, setDevice] = useState(MOBILE);
+    const [iframeSrc, setIframeSrc] = useState(reports_dictionary.tipo[device]);
 
     useEffect(() => {
         if (userAuth && !userAuth.includes('reporte_tipo_polen')) {
             router.push('/login');
         }
+        const innerWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        setDevice(innerWidth < 768 ? MOBILE : DESKTOP);
     }, []);
 
-    const onChangeMenuSelection = (e) => {
-        if (e === 'tipo') {
-            setIframeSrc(isMobile ? MOBILE_REPORTE_POR_TIPO : DESKTOP_REPORTE_POR_TIPO);
-        } else if (e === 'diario') {
-            setIframeSrc(isMobile ? MOBILE_REPORTE_DIARIO : DESKTOP_REPORTE_DIARIO);
-        } else {
-            setIframeSrc(isMobile ? MOBILE_REPORTE_DIARIO_METEOROLOGICO : DESKTOP_REPORTE_DIARIO_METEOROLOGICO)
-        }
+    useEffect(() => {
+        setIframeSrc(reports_dictionary.tipo[device])
+    }, [device]);
+
+    const onChangeMenuSelection = (type) => {
+        const report = reports_dictionary[type][device];
+        setIframeSrc(report)
     };
 
     return <MainTheme onChangeMenuSelection={onChangeMenuSelection}>
         <div className="main-section reports">
-            <Iframe iframeSrc={iframeSrc} />
+            {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
         </div>
     </MainTheme>;
 }

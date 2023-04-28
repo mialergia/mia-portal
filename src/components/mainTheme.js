@@ -12,7 +12,6 @@ import Header from '../components/header';
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            {'Copyright © '}
             <Link color="inherit" href="https://miaportal.com/">
                 MIA Portal
             </Link>{' '}
@@ -207,7 +206,7 @@ export default function MainTheme({ children, onChangeMenuSelection, title }) {
                 </Box>
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <Header onDrawerToggle={handleDrawerToggle} title={title}/>
-                    <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
+                    <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1', padding: '16px' }}>
                         {children}
                     </Box>
                     <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>

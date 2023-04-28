@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 
 const Cookies = require('js-cookie');
 
-
 function Header(props) {
     const { onDrawerToggle, title } = props;
     const router = useRouter();
@@ -31,16 +30,16 @@ function Header(props) {
             sx={{ zIndex: 0, alignItems: "left" }}
 
         >
-            <Toolbar>
+            <Toolbar sx={{ minHeight: '57px' }}>
                 <Grid container spacing={0.5} alignItems="left" width="50px">
                     <Grid xs sx={{ display: { sm: 'none', xs: 'block' } }} item>
                         <IconButton
-                            color="inherit"
+                            color="#fff"
                             aria-label="open drawer"
                             onClick={onDrawerToggle}
                             edge="start"
                         >
-                            <MenuIcon />
+                            <MenuIcon sx={{ color: "#fff" }} />
                         </IconButton>
                     </Grid>
                 </Grid>
@@ -51,11 +50,11 @@ function Header(props) {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <IconButton color="inherit" sx={{ p: 0.8, backgroundColor: "inherit" }} onClick={handleLogOut}>
-                            <Typography color="inherit" variant="p" component="p" fontSize="14px">
+                        <IconButton color="white" sx={{ p: 0.8, backgroundColor: "inherit" }} onClick={handleLogOut}>
+                            <Typography color="white" variant="p" component="p" fontSize="14px">
                                 Salir
                             </Typography>
-                            <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000000"><path d="M12 12h7m0 0l-3 3m3-3l-3-3M19 6V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                            <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M12 12h7m0 0l-3 3m3-3l-3-3M19 6V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                         </IconButton>
                     </Grid>
                 </Grid>
