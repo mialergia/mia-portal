@@ -4,6 +4,7 @@ const Cookies = require('js-cookie');
 
 function useUserAuth() {
     const [userAuth, setUserAuth] = useState(null);
+    const [username, setUsername] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -13,12 +14,13 @@ function useUserAuth() {
             if (userInfo) {
                 const roles = userInfo.roles.split(',');
                 setUserAuth(roles);
+                setUsername(userInfo.username)
             }
         } else {
             router.push('/login');
         }
     }, []);
-    return userAuth;
+    return {userAuth, username};
 }
     
     

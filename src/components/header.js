@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 const Cookies = require('js-cookie');
 
 function Header(props) {
-    const { onDrawerToggle, title } = props;
+    const { onDrawerToggle, username, title } = props;
     const router = useRouter();
 
     const handleLogOut = () => {
@@ -47,6 +47,11 @@ function Header(props) {
                     <Grid item xs align="center">
                         <Typography color="#fff" variant="h5" component="h1" fontWeight="600" margin="8px 0">
                             {title}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography color="white" variant="p" component="p" fontSize="14px" marginRight="24px">
+                            {username}
                         </Typography>
                     </Grid>
                     <Grid item>
