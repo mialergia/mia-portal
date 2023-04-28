@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -25,7 +26,17 @@ const itemCategory = {
 };
 
 export default function Navigator(props) {
+    const router = useRouter();
     const { onChangeMenuSelection, ...other } = props;
+
+    const handleNavigation = (target, type = '') => {
+        const currentPath = router.pathname;
+        if (`/${target}` !== currentPath) {
+            router.push(`/${target}${type && "?type="}${type ?? ""}`)
+        } else {
+            onChangeMenuSelection(type)
+        }
+    }
 
     return (
         <Drawer variant="permanent" {...other}>
@@ -35,25 +46,39 @@ export default function Navigator(props) {
                     MIA Portal
                 </ListItem>
 
+                <Box sx={{ bgcolor: '#101F33' }}>
+                    <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
+                        <ListItemText sx={{ color: '#fff' }}>Administrador</ListItemText>
+                    </ListItem>
+
+                    <ListItem disablePadding onClick={() => handleNavigation('registerUser')}>
+                        <ListItemButton selected={false} sx={item}>
+                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
+                            <ListItemText>Registrar Usuario</ListItemText>
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider sx={{ mt: 2 }} />
+                </Box>
+
 
                 <Box sx={{ bgcolor: '#101F33' }}>
                     <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
                         <ListItemText sx={{ color: '#fff' }}>Reportes</ListItemText>
                     </ListItem>
 
-                    <ListItem disablePadding onClick={() => onChangeMenuSelection('tipo')}>
+                    <ListItem disablePadding onClick={() => handleNavigation('reports','tipo')}>
                         <ListItemButton selected={false} sx={item}>
                             <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
                             <ListItemText>Por tipo</ListItemText>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding onClick={() => onChangeMenuSelection('diario')}>
+                    <ListItem disablePadding onClick={() => handleNavigation('reports','diario')}>
                         <ListItemButton selected={false} sx={item}>
                             <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
                             <ListItemText>Diario</ListItemText>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding onClick={() => onChangeMenuSelection('diario_met')}>
+                    <ListItem disablePadding onClick={() => handleNavigation('reports','diario_met')}>
                         <ListItemButton selected={false} sx={item}>
                             <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
                             <ListItemText>Diario + Meteorológico</ListItemText>
@@ -67,19 +92,19 @@ export default function Navigator(props) {
                         <ListItemText sx={{ color: '#fff' }}>Pacientes</ListItemText>
                     </ListItem>
 
-                    <ListItem disablePadding onClick={() => onChangeMenuSelection('sintomas')}>
+                    <ListItem disablePadding onClick={() => handleNavigation('reports','sintomas')}>
                         <ListItemButton selected={false} sx={item}>
                             <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
                             <ListItemText>Síntomas crónicos</ListItemText>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding onClick={() => onChangeMenuSelection('entrada_diaria')}>
+                    <ListItem disablePadding onClick={() => handleNavigation('reports','entrada_diaria')}>
                         <ListItemButton selected={false} sx={item}>
                             <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
                             <ListItemText>Entrada diaria</ListItemText>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem disablePadding onClick={() => onChangeMenuSelection('test_prick')}>
+                    <ListItem disablePadding onClick={() => handleNavigation('reports','test_prick')}>
                         <ListItemButton selected={false} sx={item}>
                             <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
                             <ListItemText>Test Prick</ListItemText>

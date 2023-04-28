@@ -40,8 +40,10 @@ function Reports() {
     const router = useRouter();
     const userAuth = useUserAuth();
 
+    const {type = 'tipo'} = router.query;
+
     const [device, setDevice] = useState(MOBILE);
-    const [iframeSrc, setIframeSrc] = useState(reports_dictionary.tipo[device]);
+    const [iframeSrc, setIframeSrc] = useState(reports_dictionary[type][device]);
 
     useEffect(() => {
         if (userAuth && !userAuth.includes('reporte_tipo_polen')) {
@@ -52,8 +54,8 @@ function Reports() {
     }, []);
 
     useEffect(() => {
-        setIframeSrc(reports_dictionary.tipo[device])
-    }, [device]);
+        setIframeSrc(reports_dictionary[type][device])
+    }, [device, type]);
 
     const onChangeMenuSelection = (type) => {
         const report = reports_dictionary[type][device];

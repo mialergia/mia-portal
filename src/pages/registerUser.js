@@ -28,7 +28,6 @@ function RegisterUser() {
     }, []);
 
     useEffect(() => {
-        console.log("RENDERING", isRendering)
         setIsRendering(false)
     }, []);
 
