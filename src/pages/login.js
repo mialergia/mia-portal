@@ -9,11 +9,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Grid, Alert } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import Cookies from 'js-cookie';
-
-const theme = createTheme();
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '../components/theme'
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -49,6 +47,8 @@ export default function Login() {
                     setErrors({ variant: 'success', message: `¡Login exitoso! Redirigiendo...` })
                     saveUserData(email, data.features);
                     window.location.href = '/reports';
+                } else {
+                    setErrors({ variant: 'warning', message: 'No se pudo iniciar sesión. Revise el Email y/o la Contraseña' })            
                 }
             }).catch(error => {
                 setErrors({ variant: 'error', message: 'No se pudo iniciar sesión. Intente nuevamente.' })
@@ -108,7 +108,7 @@ export default function Login() {
                                 setPassword(e.target.value)
                             }}
                         />
-                        <Grid item xs={12} sx={{ height: '58px', marginTop: "16px" }}>
+                        <Grid item xs={12} sx={{ height: '64px', marginTop: "16px" }}>
                             {Object.keys(errors).length > 0 && <Alert sx={{ marginTop: 0 }} severity={errors.variant}>{errors.message}</Alert>}
                         </Grid>
                         <Button

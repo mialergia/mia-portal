@@ -35,7 +35,6 @@ const reports_dictionary = {
 const MOBILE = 'mobile';
 const DESKTOP = 'desktop'
 
-
 function Reports() {
     const router = useRouter();
     const {userAuth, username} = useUserAuth();
