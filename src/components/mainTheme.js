@@ -172,7 +172,7 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function MainTheme({ children, onChangeMenuSelection, title }) {
+export default function MainTheme({ children, onChangeMenuSelection, title, userAuth }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -195,6 +195,7 @@ export default function MainTheme({ children, onChangeMenuSelection, title }) {
                             open={mobileOpen}
                             onClose={handleDrawerToggle}
                             onChangeMenuSelection={onChangeMenuSelection}
+                            userAuth={userAuth}
                         />
                     )}
 
@@ -202,6 +203,7 @@ export default function MainTheme({ children, onChangeMenuSelection, title }) {
                         PaperProps={{ style: { width: drawerWidth } }}
                         sx={{ display: { sm: 'block', xs: 'none' } }}
                         onChangeMenuSelection={onChangeMenuSelection}
+                        userAuth={userAuth}
                     />
                 </Box>
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>

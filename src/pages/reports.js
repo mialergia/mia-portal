@@ -62,7 +62,7 @@ function Reports() {
         setIframeSrc(report)
     };
 
-    return <MainTheme onChangeMenuSelection={onChangeMenuSelection}>
+    return <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth}>
         <div className="main-section reports">
             {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
         </div>

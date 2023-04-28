@@ -25,9 +25,84 @@ const itemCategory = {
     px: 3,
 };
 
+const navigationOptionsList = [
+    {
+        section_title: 'Administrador',
+        permissions: ['crear_usuario'],
+        children: [
+            {
+                id: 'registerUser',
+                title: 'Registrar usuario',
+                permission: 'crear_usuario',
+                target: 'registerUser',
+                icon: <DnsRoundedIcon />
+            }
+        ]
+    },
+    {
+        section_title: 'Reportes',
+        permissions: ['reporte_tipo_polen', 'reporte_diario', 'reporte_diario_meteorologico'],
+        children: [
+            {
+                id: 'tipo',
+                title: 'Por tipo',
+                permission: 'reporte_tipo_polen',
+                target: 'reports',
+                icon: <DnsRoundedIcon />
+            },
+            {
+                id: 'diario',
+                title: 'Diario',
+                permission: 'reporte_diario',
+                target: 'reports',
+                icon: <DnsRoundedIcon />
+            },
+            {
+                id: 'diario_met',
+                title: 'Diario + Meteorológico',
+                permission: 'reporte_diario_meteorologico',
+                target: 'reports',
+                icon: <DnsRoundedIcon />
+            },
+        ]
+    },
+    {
+        section_title: 'Pacientes',
+        permissions: ['reporte_paciente_sintomas_cronicos', 'reporte_paciente_entrada_diaria', 'reporte_paciente_test_prick'],
+        children: [
+            {
+                id: 'sintomas',
+                title: 'Síntomas crónicos',
+                permission: 'reporte_paciente_sintomas_cronicos',
+                target: 'reports',
+                icon: <DnsRoundedIcon />
+            },
+            {
+                id: 'entrada_diaria',
+                title: 'Entrada diaria',
+                permission: 'reporte_paciente_entrada_diaria',
+                target: 'reports',
+                icon: <DnsRoundedIcon />
+            },
+            {
+                id: 'test_prick',
+                title: 'Test Prick',
+                permission: 'reporte_paciente_test_prick',
+                target: 'reports',
+                icon: <DnsRoundedIcon />
+            },
+        ]
+    },
+
+]
+
+const checkPermissions = (arr1, arr2) => {
+    return arr1.some((item) => arr2?.includes(item));
+}
+
 export default function Navigator(props) {
     const router = useRouter();
-    const { onChangeMenuSelection, ...other } = props;
+    const { onChangeMenuSelection, userAuth, ...other } = props;
 
     const handleNavigation = (target, type = '') => {
         const currentPath = router.pathname;
@@ -46,73 +121,27 @@ export default function Navigator(props) {
                     MIA Portal
                 </ListItem>
 
-                <Box sx={{ bgcolor: '#101F33' }}>
-                    <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
-                        <ListItemText sx={{ color: '#fff' }}>Administrador</ListItemText>
-                    </ListItem>
-
-                    <ListItem disablePadding onClick={() => handleNavigation('registerUser')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Registrar Usuario</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <Divider sx={{ mt: 2 }} />
-                </Box>
-
-
-                <Box sx={{ bgcolor: '#101F33' }}>
-                    <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
-                        <ListItemText sx={{ color: '#fff' }}>Reportes</ListItemText>
-                    </ListItem>
-
-                    <ListItem disablePadding onClick={() => handleNavigation('reports','tipo')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Por tipo</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding onClick={() => handleNavigation('reports','diario')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Diario</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding onClick={() => handleNavigation('reports','diario_met')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Diario + Meteorológico</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <Divider sx={{ mt: 2 }} />
-                </Box>
-
-                <Box sx={{ bgcolor: '#101F33' }}>
-                    <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }}>
-                        <ListItemText sx={{ color: '#fff' }}>Pacientes</ListItemText>
-                    </ListItem>
-
-                    <ListItem disablePadding onClick={() => handleNavigation('reports','sintomas')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Síntomas crónicos</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding onClick={() => handleNavigation('reports','entrada_diaria')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Entrada diaria</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding onClick={() => handleNavigation('reports','test_prick')}>
-                        <ListItemButton selected={false} sx={item}>
-                            <ListItemIcon><DnsRoundedIcon /></ListItemIcon>
-                            <ListItemText>Test Prick</ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    <Divider sx={{ mt: 2 }} />
-                </Box>
-
+                {
+                    navigationOptionsList.map((section) => {
+                        return (checkPermissions(section.permissions, userAuth) && <Box sx={{ bgcolor: '#101F33' }} key={section.section_title}>
+                            <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }} >
+                                <ListItemText sx={{ color: '#fff' }}>{section.section_title}</ListItemText>
+                            </ListItem>
+                            {
+                                section.children?.map(({ id, title, icon, permission, target }) => {
+                                    return userAuth?.includes(permission) && <ListItem disablePadding onClick={() => handleNavigation(target, id)} key={id}>
+                                        <ListItemButton selected={false} sx={item}>
+                                            <ListItemIcon>{icon}</ListItemIcon>
+                                            <ListItemText>{title}</ListItemText>
+                                        </ListItemButton>
+                                    </ListItem>
+                                })
+                            }
+                            <Divider sx={{ mt: 2 }} />
+                        </Box>
+                        )
+                    })
+                }
             </List>
         </Drawer>
     );

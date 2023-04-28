@@ -44,7 +44,7 @@ function RegisterUser() {
         }
     };
 
-    return (!isRendering && <MainTheme title="Registrar usuario">
+    return (!isRendering && <MainTheme title="Registrar usuario" userAuth={userAuth}>
         <div className="main-section reports">
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
