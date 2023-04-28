@@ -38,7 +38,7 @@ const DESKTOP = 'desktop'
 
 function Reports() {
     const router = useRouter();
-    const userAuth = useUserAuth();
+    const {userAuth, username} = useUserAuth();
 
     const {type = 'tipo'} = router.query;
 
@@ -62,7 +62,7 @@ function Reports() {
         setIframeSrc(report)
     };
 
-    return <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth}>
+    return <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username}>
         <div className="main-section reports">
             {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
         </div>
