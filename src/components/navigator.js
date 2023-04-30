@@ -8,7 +8,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import ForestIcon from '@mui/icons-material/Forest';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
+import MedicalInformationIcon from '@mui/icons-material/MedicalInformation';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 const item = {
     py: '2px',
@@ -35,7 +41,7 @@ const navigationOptionsList = [
                 title: 'Registrar usuario',
                 permission: 'crear_usuario',
                 target: 'registerUser',
-                icon: <DnsRoundedIcon />
+                icon: <PersonAddIcon />
             }
         ]
     },
@@ -48,21 +54,21 @@ const navigationOptionsList = [
                 title: 'Por tipo',
                 permission: 'reporte_tipo_polen',
                 target: 'reports',
-                icon: <DnsRoundedIcon />
+                icon: <ForestIcon />
             },
             {
                 id: 'diario',
                 title: 'Diario',
                 permission: 'reporte_diario',
                 target: 'reports',
-                icon: <DnsRoundedIcon />
+                icon: <CalendarMonthIcon />
             },
             {
                 id: 'diario_met',
                 title: 'Diario + Meteorológico',
                 permission: 'reporte_diario_meteorologico',
                 target: 'reports',
-                icon: <DnsRoundedIcon />
+                icon: <ThermostatIcon />
             },
         ]
     },
@@ -75,21 +81,21 @@ const navigationOptionsList = [
                 title: 'Síntomas crónicos',
                 permission: 'reporte_paciente_sintomas_cronicos',
                 target: 'reports',
-                icon: <DnsRoundedIcon />
+                icon: <MedicalInformationIcon />
             },
             {
                 id: 'entrada_diaria',
                 title: 'Entrada diaria',
                 permission: 'reporte_paciente_entrada_diaria',
                 target: 'reports',
-                icon: <DnsRoundedIcon />
+                icon: <MonitorHeartIcon />
             },
             {
                 id: 'test_prick',
                 title: 'Test Prick',
                 permission: 'reporte_paciente_test_prick',
                 target: 'reports',
-                icon: <DnsRoundedIcon />
+                icon: <LocalHospitalIcon />
             },
         ]
     },
@@ -103,8 +109,10 @@ const checkPermissions = (arr1, arr2) => {
 export default function Navigator(props) {
     const router = useRouter();
     const { onChangeMenuSelection, userAuth, ...other } = props;
+    const [activeItem, setActiveItem] = React.useState('');
 
     const handleNavigation = (target, type = '') => {
+        setActiveItem(type);
         const currentPath = router.pathname;
         if (`/${target}` !== currentPath) {
             router.push(`/${target}${type && "?type="}${type ?? ""}`)
@@ -130,7 +138,7 @@ export default function Navigator(props) {
                             {
                                 section.children?.map(({ id, title, icon, permission, target }) => {
                                     return userAuth?.includes(permission) && <ListItem disablePadding onClick={() => handleNavigation(target, id)} key={id}>
-                                        <ListItemButton selected={false} sx={item}>
+                                        <ListItemButton selected={activeItem === id} sx={item}>
                                             <ListItemIcon>{icon}</ListItemIcon>
                                             <ListItemText>{title}</ListItemText>
                                         </ListItemButton>
