@@ -19,16 +19,18 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 const item = {
     py: '2px',
     px: 3,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#c8e6c9',
     '&:hover, &:focus': {
-        bgcolor: 'rgba(255, 255, 255, 0.08)',
+        backgroundColor: '#66bb6a',
     },
+    "&.Mui-selected": { backgroundColor: "#43a047", color: "#c8e6c9" }
 };
 
 const itemCategory = {
     boxShadow: '0 -1px 0 rgb(255,255,255,0.1) inset',
     py: 1.5,
     px: 3,
+    color: '#c8e6c9'
 };
 
 const navigationOptionsList = [
@@ -124,8 +126,8 @@ export default function Navigator(props) {
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
-                <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff', fontWeight: 600, justifyContent: 'space-evenly' }}>
-                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#fff"><path d="M12 2L7 6.643S10.042 7 12 7c1.958 0 5-.357 5-.357L12 2zM8.5 7L5 10.94S7.625 12 12 12s7-1.06 7-1.06L15.5 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 11.5L3 15.523S5.7 18 12 18s9-2.477 9-2.477L17.5 11.5M12 22v-3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#c8e6c9', fontWeight: 600, justifyContent: 'space-evenly' }}>
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#c8e6c9"><path d="M12 2L7 6.643S10.042 7 12 7c1.958 0 5-.357 5-.357L12 2zM8.5 7L5 10.94S7.625 12 12 12s7-1.06 7-1.06L15.5 7" stroke="#c8e6c9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 11.5L3 15.523S5.7 18 12 18s9-2.477 9-2.477L17.5 11.5M12 22v-3" stroke="#c8e6c9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     MIA Portal
                 </ListItem>
 
@@ -133,7 +135,7 @@ export default function Navigator(props) {
                     navigationOptionsList.map((section) => {
                         return (checkPermissions(section.permissions, userAuth) && <Box sx={{ bgcolor: '#101F33' }} key={section.section_title}>
                             <ListItem sx={{ py: 2, px: 3, fontWeight: 600 }} >
-                                <ListItemText sx={{ color: '#fff' }}>{section.section_title}</ListItemText>
+                                <ListItemText sx={{ color: '#c8e6c9' }}>{section.section_title}</ListItemText>
                             </ListItem>
                             {
                                 section.children?.map(({ id, title, icon, permission, target }) => {

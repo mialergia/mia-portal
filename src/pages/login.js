@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Image from 'next/Image';
+// import Image from 'next/Image';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -75,7 +75,7 @@ export default function Login() {
                         borderRadius: '12px'
                     }}
                 >
-                    <Image src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" alt="MIA Portal logo"/>
+                    <img src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" alt="MIA Portal logo"/>
                     <Typography component="h1" variant="h5">
                         MIA Portal
                     </Typography>

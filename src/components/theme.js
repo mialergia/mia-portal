@@ -3,9 +3,9 @@ import { createTheme } from '@mui/material/styles';
 let theme = createTheme({
     palette: {
         primary: {
-            light: '#8AC082',
-            main: '#8AC082',
-            dark: '#69AF62',
+            light: '#2e7d32',
+            main: '#2e7d32',
+            dark: '#2e7d32',
         },
     },
     typography: {
@@ -38,7 +38,7 @@ theme = {
         MuiDrawer: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: '#69AF62',
+                    backgroundColor: '#2e7d32',
                 },
             },
         },
@@ -99,7 +99,7 @@ theme = {
         MuiDivider: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#69AF62',
+                    backgroundColor: '#2e7d32',
                 },
             },
         },
@@ -143,7 +143,7 @@ theme = {
         MuiListItem: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#69AF62',
+                    backgroundColor: '#2e7d32',
                 }
             }
         }
