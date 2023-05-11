@@ -51,6 +51,7 @@ function RegisterUser() {
                 body: JSON.stringify({
                     "user": email,
                     "password": password,
+                    "creator": username, 
                     "role": role
                 }),
             }).then((response) => {
