@@ -55,33 +55,7 @@ theme = {
                 },
             },
         },
-        MuiTabs: {
-            styleOverrides: {
-                root: {
-                    marginLeft: theme.spacing(1),
-                },
-                indicator: {
-                    height: 3,
-                    borderTopLeftRadius: 3,
-                    borderTopRightRadius: 3,
-                    backgroundColor: theme.palette.common.white,
-                },
-            },
-        },
-        MuiTab: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'none',
-                    margin: '0 16px',
-                    minWidth: 0,
-                    padding: 0,
-                    [theme.breakpoints.up('md')]: {
-                        padding: 0,
-                        minWidth: 0,
-                    },
-                },
-            },
-        },
+
         MuiIconButton: {
             styleOverrides: {
                 root: {
@@ -89,13 +63,7 @@ theme = {
                 },
             },
         },
-        MuiTooltip: {
-            styleOverrides: {
-                tooltip: {
-                    borderRadius: 4,
-                },
-            },
-        },
+      
         MuiDivider: {
             styleOverrides: {
                 root: {
@@ -115,7 +83,7 @@ theme = {
         MuiListItemText: {
             styleOverrides: {
                 primary: {
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: theme.typography.fontWeightMedium,
                 },
             },

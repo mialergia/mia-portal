@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import useUserAuth from '../hooks/useUserAuth';
 // import Image from 'next/Image';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,6 +19,14 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({})
+    const { userAuth } = useUserAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (userAuth) {
+            router.push('/reports');
+        }
+    }, [userAuth]);
 
     const saveUserData = (user, features) => {
         const userInfo = {
@@ -24,7 +34,7 @@ export default function Login() {
             roles: features.toString(),
         };
         Cookies.set('userInfo', JSON.stringify(userInfo),
-            { expires: 14 },
+            { expires: 14, secure: true, sameSite: 'strict' },
         )
     };
     const handleSubmit = async (event) => {
