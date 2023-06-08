@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import useUserAuth from '../hooks/useUserAuth';
 // import Image from 'next/Image';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -17,6 +20,14 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({})
+    const { userAuth } = useUserAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (userAuth) {
+            router.push('/reportes');
+        }
+    }, [userAuth]);
 
     const saveUserData = (user, features) => {
         const userInfo = {
@@ -24,14 +35,14 @@ export default function Login() {
             roles: features.toString(),
         };
         Cookies.set('userInfo', JSON.stringify(userInfo),
-            { expires: 14 },
+            { expires: 14, secure: true, sameSite: 'strict' },
         )
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (email && password) {
-            await fetch("http://localhost:8080/users/login", {
+            await fetch("https://api.miaportal.fcien.edu.uy/users/login", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -46,7 +57,7 @@ export default function Login() {
                 if (data.login) {
                     setErrors({ variant: 'success', message: `¡Login exitoso! Redirigiendo...` })
                     saveUserData(email, data.features);
-                    window.location.href = '/reports';
+                    window.location.href = '/reportes';
                 } else {
                     setErrors({ variant: 'warning', message: 'No se pudo iniciar sesión. Revise el Email y/o la Contraseña' })            
                 }
@@ -59,10 +70,13 @@ export default function Login() {
         }
     };
 
-    return (
+    return (<>
+        <Head>
+            <title>MIA Portal | Login</title>
+        </Head>
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs" sx={{
-                backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "64px auto"
+                backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "36px auto"
             }}>
                 <CssBaseline />
                 <Box
@@ -75,8 +89,8 @@ export default function Login() {
                         borderRadius: '12px'
                     }}
                 >
-                    <img src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" alt="MIA Portal logo"/>
-                    <Typography component="h1" variant="h5">
+                    <img src="../../appIcon.png" width="120" height="120" alt="MIA Portal logo"/>
+                    <Typography component="h1" variant="h5" sx={{mt: 1}}>
                         MIA Portal
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -115,7 +129,7 @@ export default function Login() {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 2, mb: 2 }}
                         >
                             Entrar
                         </Button>
@@ -123,13 +137,13 @@ export default function Login() {
                 </Box>
 
                 <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
-                    <Link color="inherit" href="https://miaportal.com/">
+                    <Link color="inherit" href="/">
                         Mia Portal
                     </Link>{' '}
                     {new Date().getFullYear()}
                     {'.'}
                 </Typography>
             </Container>
-        </ThemeProvider>
+        </ThemeProvider></>
     );
 }
