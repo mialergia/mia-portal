@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 
@@ -43,7 +44,7 @@ function RegisterUser() {
 
             setErrors({})
             // setLoading(true);
-            await fetch("http://localhost:8080/users/create", {
+            await fetch("http://api.miaportal.fcien.edu.uy/users/create", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -51,7 +52,7 @@ function RegisterUser() {
                 body: JSON.stringify({
                     "user": email,
                     "password": password,
-                    "creator": username, 
+                    "creator": username,
                     "role": role
                 }),
             }).then((response) => {
@@ -73,107 +74,112 @@ function RegisterUser() {
         }
     }
 
-    return (<MainTheme userAuth={userAuth} username={username}>
-        <div className="main-section reports">
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="12" r="8" fill="none" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M42 44C42 34.0589 33.9411 26 24 26C14.0589 26 6 34.0589 6 44" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M19 39H29" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M24 34V44" stroke="#333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                    <Typography color="black" variant="h5" component="h5" fontSize="24px" marginTop="24px">
-                        Registrar usuario
-                    </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email"
-                                    name="email"
-                                    autoComplete="email"
-                                    onChange={(e) => {
-                                        setErrors({})
-                                        setEmail(e.target.value)
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Contraseña"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                    onChange={(e) => {
-                                        setPassword(e.target.value)
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="confirmPassword"
-                                    label="Confirmar contraseña"
-                                    type="password"
-                                    id="confirmPassword"
-                                    autoComplete="confirm-password"
-                                    onChange={(e) => {
-                                        setPasswordValidate(e.target.value)
-                                    }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12}>
-                                <FormControl required fullWidth error={errors.role && "error"} sx={{ background: 'white', borderRadius: '8px' }}>
-                                    <InputLabel id="demo-simple-select-error-label">Rol</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-error-label"
-                                        id="demo-simple-select-error"
-                                        value={role}
-                                        label="Rol"
-                                        onChange={e => setRole(e.target.value)}
-                                        renderValue={(value) => value}
-                                    >
-                                        <MenuItem value="Investigador">Investigador</MenuItem>
-                                        <MenuItem value="Medico">Medico</MenuItem>
-                                        <MenuItem value="Administrador">Administrador</MenuItem>
-                                    </Select>
-                                    {errors.role && <FormHelperText>Error</FormHelperText>}
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} sx={{ height: '74px' }}>
-                                {Object.keys(errors).length > 0 && <Alert sx={{ marginTop: 0 }} severity={errors.variant}>{errors.message}</Alert>}
-                            </Grid>
-
-                        </Grid>
-
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                            disabled={!(email && password && passwordValidate && role && (password === passwordValidate))}
+    return (
+        <>
+            <Head>
+                <title>MIA Portal | Registrar usuario</title>
+            </Head>
+            <MainTheme userAuth={userAuth} username={username} selectedReport="crear_usuario">
+                <div className="main-section reports">
+                    <Container component="main" maxWidth="xs">
+                        <CssBaseline />
+                        <Box
+                            sx={{
+                                marginTop: 8,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
                         >
-                            Crear
-                        </Button>
+                            <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="12" r="8" fill="none" stroke="#2e7d32" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M42 44C42 34.0589 33.9411 26 24 26C14.0589 26 6 34.0589 6 44" stroke="#2e7d32" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M19 39H29" stroke="#2e7d32" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M24 34V44" stroke="#2e7d32" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            <Typography color="black" variant="h5" component="h5" fontSize="24px" marginTop="24px">
+                                Registrar usuario
+                            </Typography>
+                            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            id="email"
+                                            label="Email"
+                                            name="email"
+                                            autoComplete="email"
+                                            onChange={(e) => {
+                                                setErrors({})
+                                                setEmail(e.target.value)
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            name="password"
+                                            label="Contraseña"
+                                            type="password"
+                                            id="password"
+                                            autoComplete="new-password"
+                                            onChange={(e) => {
+                                                setPassword(e.target.value)
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            name="confirmPassword"
+                                            label="Confirmar contraseña"
+                                            type="password"
+                                            id="confirmPassword"
+                                            autoComplete="confirm-password"
+                                            onChange={(e) => {
+                                                setPasswordValidate(e.target.value)
+                                            }}
+                                        />
+                                    </Grid>
 
-                    </Box>
-                </Box>
+                                    <Grid item xs={12}>
+                                        <FormControl required fullWidth error={errors.role && "error"} sx={{ background: 'white', borderRadius: '8px' }}>
+                                            <InputLabel id="demo-simple-select-error-label">Rol</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-error-label"
+                                                id="demo-simple-select-error"
+                                                value={role}
+                                                label="Rol"
+                                                onChange={e => setRole(e.target.value)}
+                                                renderValue={(value) => value}
+                                            >
+                                                <MenuItem value="Investigador">Investigador</MenuItem>
+                                                <MenuItem value="Medico">Medico</MenuItem>
+                                                <MenuItem value="Administrador">Administrador</MenuItem>
+                                            </Select>
+                                            {errors.role && <FormHelperText>Error</FormHelperText>}
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} sx={{ height: '74px' }}>
+                                        {Object.keys(errors).length > 0 && <Alert sx={{ marginTop: 0 }} severity={errors.variant}>{errors.message}</Alert>}
+                                    </Grid>
 
-            </Container>
-        </div>
-    </MainTheme>);
+                                </Grid>
+
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                    disabled={!(email && password && passwordValidate && role && (password === passwordValidate))}
+                                >
+                                    Crear
+                                </Button>
+
+                            </Box>
+                        </Box>
+
+                    </Container>
+                </div>
+            </MainTheme></>);
 }
 
 export default RegisterUser;

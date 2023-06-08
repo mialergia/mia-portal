@@ -39,7 +39,8 @@ function Header(props) {
                             onClick={onDrawerToggle}
                             edge="start"
                         >
-                            <MenuIcon sx={{ color: "#fff" }} />
+                            <MenuIcon sx={{ color: "#fff", marginRight: '12px' }} />
+                            <img src="../../appIcon.png" width="36px"></img>
                         </IconButton>
                     </Grid>
                 </Grid>

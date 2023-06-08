@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 import Iframe from '../components/iframe'
@@ -36,11 +37,16 @@ function Reports() {
         setIframeSrc(report)
     };
 
-    return <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username}>
-        <div className="main-section reports">
-            {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
-        </div>
-    </MainTheme>;
+    return <>
+        <Head>
+            <title>MIA Portal | Reportes</title>
+        </Head>
+        <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username} selectedReport={type}>
+            <div className="main-section reports">
+                {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
+            </div>
+        </MainTheme>
+    </>;
 }
 
 export default Reports;

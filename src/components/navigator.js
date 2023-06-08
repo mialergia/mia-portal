@@ -17,8 +17,11 @@ const item = {
     color: '#c8e6c9',
     '&:hover, &:focus': {
         backgroundColor: '#2e7d32',
+        color: '#fff',
     },
-    "&.Mui-selected": { backgroundColor: "#43a047", color: "#fff" }
+    "&.Mui-selected": { backgroundColor: "#43a047", color: "#fff" },
+    "&.Mui-selected:hover": { backgroundColor: "#43a047"}
+
 };
 
 const itemCategory = {
@@ -34,8 +37,8 @@ const checkPermissions = (arr1, arr2) => {
 
 export default function Navigator(props) {
     const router = useRouter();
-    const { onChangeMenuSelection, userAuth, ...other } = props;
-    const [activeItem, setActiveItem] = React.useState('diario');
+    const { onChangeMenuSelection, userAuth, selectedReport, ...other } = props;
+    const [activeItem, setActiveItem] = React.useState(selectedReport || 'reporte_tipo_polen');
 
     const handleNavigation = (target, type = '') => {
         setActiveItem(type);
@@ -51,7 +54,7 @@ export default function Navigator(props) {
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
                 <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff', fontWeight: 600, justifyContent: 'space-evenly', backgroundColor: '#2e7d32' }} className='main_title'>
-                    <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="#c8e6c9"><path d="M12 2L7 6.643S10.042 7 12 7c1.958 0 5-.357 5-.357L12 2zM8.5 7L5 10.94S7.625 12 12 12s7-1.06 7-1.06L15.5 7" stroke="#c8e6c9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.5 11.5L3 15.523S5.7 18 12 18s9-2.477 9-2.477L17.5 11.5M12 22v-3" stroke="#c8e6c9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    <img src="../../appIcon.png" width="32px"></img>
                     MIA Portal
                 </ListItem>
 
@@ -64,7 +67,7 @@ export default function Navigator(props) {
                             {
                                 section.children?.map(({ id, title, icon, permission, target }) => {
                                     return userAuth?.includes(permission) && <ListItem disablePadding onClick={() => handleNavigation(target, id)} key={id}>
-                                        <ListItemButton selected={activeItem === id} sx={item}>
+                                        <ListItemButton className={activeItem === id ? 'selected' : ''} selected={activeItem === id} sx={item}>
                                             <ListItemIcon>{icon}</ListItemIcon>
                                             <ListItemText>{title}</ListItemText>
                                         </ListItemButton>
