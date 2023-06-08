@@ -11,14 +11,14 @@ import { getIframeSrc } from '@/components/utils';
 const MOBILE = 'mobile';
 const DESKTOP = 'desktop'
 
-function Reports() {
+function Reportes() {
     const router = useRouter();
     const { userAuth, username } = useUserAuth();
 
-    const { type = 'reporte_tipo_polen' } = router.query;
+    const { tipo = 'reporte_tipo_polen' } = router.query;
 
     const [device, setDevice] = useState(MOBILE);
-    const [iframeSrc, setIframeSrc] = useState(getIframeSrc(userAuth, type, device));
+    const [iframeSrc, setIframeSrc] = useState(getIframeSrc(userAuth, tipo, device));
 
     useEffect(() => {
         if (userAuth && !userAuth.includes('reporte_tipo_polen')) {
@@ -29,8 +29,8 @@ function Reports() {
     }, []);
 
     useEffect(() => {
-        setIframeSrc(getIframeSrc(userAuth, type, device))
-    }, [device, type, userAuth]);
+        setIframeSrc(getIframeSrc(userAuth, tipo, device))
+    }, [device, tipo, userAuth]);
 
     const onChangeMenuSelection = (type) => {
         const report = getIframeSrc(userAuth, type, device);
@@ -41,7 +41,7 @@ function Reports() {
         <Head>
             <title>MIA Portal | Reportes</title>
         </Head>
-        <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username} selectedReport={type}>
+        <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username} selectedReport={tipo}>
             <div className="main-section reports">
                 {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
             </div>
@@ -49,4 +49,4 @@ function Reports() {
     </>;
 }
 
-export default Reports;
+export default Reportes;

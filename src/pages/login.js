@@ -25,7 +25,7 @@ export default function Login() {
 
     useEffect(() => {
         if (userAuth) {
-            router.push('/reports');
+            router.push('/reportes');
         }
     }, [userAuth]);
 
@@ -42,7 +42,7 @@ export default function Login() {
         event.preventDefault();
 
         if (email && password) {
-            await fetch("http://api.miaportal.fcien.edu.uy/users/login", {
+            await fetch("https://api.miaportal.fcien.edu.uy/users/login", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export default function Login() {
                 if (data.login) {
                     setErrors({ variant: 'success', message: `¡Login exitoso! Redirigiendo...` })
                     saveUserData(email, data.features);
-                    window.location.href = '/reports';
+                    window.location.href = '/reportes';
                 } else {
                     setErrors({ variant: 'warning', message: 'No se pudo iniciar sesión. Revise el Email y/o la Contraseña' })            
                 }

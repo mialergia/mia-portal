@@ -15,7 +15,7 @@ const navigationOptionsList = [
                 id: 'crear_usuario',
                 title: 'Registrar usuario',
                 permission: 'crear_usuario',
-                target: 'registerUser',
+                target: 'registrarUsuario',
                 icon: <PersonAddIcon />
             }
         ]
@@ -28,21 +28,21 @@ const navigationOptionsList = [
                 id: 'reporte_tipo_polen',
                 title: 'Por tipo',
                 permission: 'reporte_tipo_polen',
-                target: 'reports',
+                target: 'reportes',
                 icon: <ForestIcon />
             },
             {
                 id: 'reporte_diario',
                 title: 'Diario',
                 permission: 'reporte_diario',
-                target: 'reports',
+                target: 'reportes',
                 icon: <CalendarMonthIcon />
             },
             {
                 id: 'reporte_diario_meteorologico',
                 title: 'Diario + Meteorológico',
                 permission: 'reporte_diario_meteorologico',
-                target: 'reports',
+                target: 'reportes',
                 icon: <ThermostatIcon />
             },
         ]
@@ -55,21 +55,21 @@ const navigationOptionsList = [
                 id: 'reporte_paciente_sintomas_cronicos',
                 title: 'Síntomas crónicos',
                 permission: 'reporte_paciente_sintomas_cronicos',
-                target: 'reports',
+                target: 'reportes',
                 icon: <MedicalInformationIcon />
             },
             {
                 id: 'reporte_paciente_entrada_diaria',
                 title: 'Entrada diaria',
                 permission: 'reporte_paciente_entrada_diaria',
-                target: 'reports',
+                target: 'reportes',
                 icon: <MonitorHeartIcon />
             },
             {
                 id: 'reporte_paciente_test_prick',
                 title: 'Test Prick',
                 permission: 'reporte_paciente_test_prick',
-                target: 'reports',
+                target: 'reportes',
                 icon: <LocalHospitalIcon />
             },
         ]

@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { FormControl, InputLabel, Select, MenuItem, FormHelperText, Alert, Typography } from '@mui/material';
 
-function RegisterUser() {
+function RegistrarUsuario() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordValidate, setPasswordValidate] = useState('')
@@ -25,7 +25,7 @@ function RegisterUser() {
 
     useEffect(() => {
         if (userAuth && !userAuth?.includes('crear_usuario')) {
-            router.push('/reports');
+            router.push('/reportes');
         }
     }, [userAuth]);
 
@@ -44,7 +44,7 @@ function RegisterUser() {
 
             setErrors({})
             // setLoading(true);
-            await fetch("http://api.miaportal.fcien.edu.uy/users/create", {
+            await fetch("https://api.miaportal.fcien.edu.uy/users/create", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -182,7 +182,7 @@ function RegisterUser() {
             </MainTheme></>);
 }
 
-export default RegisterUser;
+export default RegistrarUsuario;
 
 
 

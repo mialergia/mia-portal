@@ -44,7 +44,7 @@ export default function Navigator(props) {
         setActiveItem(type);
         const currentPath = router.pathname;
         if (`/${target}` !== currentPath) {
-            router.push(`/${target}${type && "?type="}${type ?? ""}`)
+            router.push(`/${target}${type && "?tipo="}${type ?? ""}`)
         } else {
             onChangeMenuSelection(type)
         }
