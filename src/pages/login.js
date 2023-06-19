@@ -37,7 +37,7 @@ export default function Login() {
             roles: features.toString(),
         };
         Cookies.set('userInfo', JSON.stringify(userInfo),
-            { expires: 14 },
+            { expires: 14, secure: true, sameSite: 'strict' },
         )
     };
     const handleSubmit = async (event) => {

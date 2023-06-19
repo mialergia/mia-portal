@@ -6,32 +6,7 @@ import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 import Iframe from '../components/iframe'
 
-const reports_dictionary = {
-    reporte_tipo_polen: {
-        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3yy9piaryc',
-        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_5jryigxq1c'
-    },
-    reporte_diario: {
-        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_v1pwonityc',
-        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_w40ygyrq3c'
-    },
-    reporte_diario_meteorologico: {
-        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_z0rfvkkuyc',
-        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_rvydwyrq3c'
-    },
-    reporte_paciente_sintomas_cronicos: {
-        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_3pj70dpp0c',
-        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_kxvz4mtq3c' // AJUSTAR
-    },
-    reporte_paciente_entrada_diaria: {
-        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_qhjuzrqp0c',
-        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_wy8wgntq3c'
-    },
-    reporte_paciente_test_prick: {
-        desktop: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_zo0iy9ur0c',
-        mobile: 'https://lookerstudio.google.com/embed/reporting/ef03f072-bf57-4097-8c3c-b8b5e74fb2ac/page/p_bos5mntq3c'
-    },
-}
+import { getIframeSrc } from '@/components/utils';
 
 const MOBILE = 'mobile';
 const DESKTOP = 'desktop'
@@ -40,10 +15,10 @@ function Reportes() {
     const router = useRouter();
     const { userAuth, username } = useUserAuth();
 
-    const { tipo: type = 'reporte_tipo_polen' } = router.query;
+    const { tipo = 'reporte_tipo_polen' } = router.query;
 
     const [device, setDevice] = useState(MOBILE);
-    const [iframeSrc, setIframeSrc] = useState(reports_dictionary[type][device]);
+    const [iframeSrc, setIframeSrc] = useState(getIframeSrc(userAuth, tipo, device));
 
     useEffect(() => {
         if (userAuth && !userAuth.includes('reporte_tipo_polen')) {
@@ -54,11 +29,11 @@ function Reportes() {
     }, []);
 
     useEffect(() => {
-        setIframeSrc(reports_dictionary[type][device])
-    }, [device, type]);
+        setIframeSrc(getIframeSrc(userAuth, tipo, device))
+    }, [device, tipo, userAuth]);
 
     const onChangeMenuSelection = (type) => {
-        const report = reports_dictionary[type][device];
+        const report = getIframeSrc(userAuth, type, device);
         setIframeSrc(report)
     };
 
@@ -66,8 +41,7 @@ function Reportes() {
         <Head>
             <title>MIA Portal | Reportes</title>
         </Head>
-
-        <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username} selectedReport={type}>
+        <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username} selectedReport={tipo}>
             <div className="main-section reports">
                 {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
             </div>
