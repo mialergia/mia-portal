@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 import Iframe from '../components/iframe'
@@ -35,11 +36,11 @@ const reports_dictionary = {
 const MOBILE = 'mobile';
 const DESKTOP = 'desktop'
 
-function Reports() {
+function Reportes() {
     const router = useRouter();
-    const {userAuth, username} = useUserAuth();
+    const { userAuth, username } = useUserAuth();
 
-    const {type = 'tipo'} = router.query;
+    const { type = 'tipo' } = router.query;
 
     const [device, setDevice] = useState(MOBILE);
     const [iframeSrc, setIframeSrc] = useState(reports_dictionary[type][device]);
@@ -61,11 +62,17 @@ function Reports() {
         setIframeSrc(report)
     };
 
-    return <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username}>
-        <div className="main-section reports">
-            {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
-        </div>
-    </MainTheme>;
+    return <>
+        <Head>
+            <title>MIA Portal | Reportes</title>
+        </Head>
+
+        <MainTheme onChangeMenuSelection={onChangeMenuSelection} userAuth={userAuth} username={username}>
+            <div className="main-section reports">
+                {iframeSrc && <Iframe iframeSrc={iframeSrc} />}
+            </div>
+        </MainTheme>
+    </>;
 }
 
-export default Reports;
+export default Reportes;

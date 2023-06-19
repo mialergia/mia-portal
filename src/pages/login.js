@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import useUserAuth from '../hooks/useUserAuth';
 // import Image from 'next/Image';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +21,15 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({})
 
+    const router = useRouter();
+    const { userAuth } = useUserAuth();
+
+    useEffect(() => {
+        if (userAuth) {
+            router.push('/reportes');
+        }
+    }, [userAuth]);
+
     const saveUserData = (user, features) => {
         const userInfo = {
             username: user,
@@ -31,7 +43,7 @@ export default function Login() {
         event.preventDefault();
 
         if (email && password) {
-            await fetch("http://localhost:8080/users/login", {
+            await fetch("https://api.miaportal.fcien.edu.uy/users/login", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -46,9 +58,9 @@ export default function Login() {
                 if (data.login) {
                     setErrors({ variant: 'success', message: `¡Login exitoso! Redirigiendo...` })
                     saveUserData(email, data.features);
-                    window.location.href = '/reports';
+                    window.location.href = '/reportes';
                 } else {
-                    setErrors({ variant: 'warning', message: 'No se pudo iniciar sesión. Revise el Email y/o la Contraseña' })            
+                    setErrors({ variant: 'warning', message: 'No se pudo iniciar sesión. Revise el Email y/o la Contraseña' })
                 }
             }).catch(error => {
                 setErrors({ variant: 'error', message: 'No se pudo iniciar sesión. Intente nuevamente.' })
@@ -60,76 +72,81 @@ export default function Login() {
     };
 
     return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs" sx={{
-                backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "64px auto"
-            }}>
-                <CssBaseline />
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        marginTop: '64px',
-                        backgroundColor: '#fff',
-                        borderRadius: '12px'
-                    }}
-                >
-                    <img src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" alt="MIA Portal logo"/>
-                    <Typography component="h1" variant="h5">
-                        MIA Portal
-                    </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            onChange={(e) => {
-                                setErrors({})
-                                setEmail(e.target.value)
-                            }}
-                        />
-                        <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            name="password"
-                            label="Contraseña"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={(e) => {
-                                setErrors({})
-                                setPassword(e.target.value)
-                            }}
-                        />
-                        <Grid item xs={12} sx={{ height: '64px', marginTop: "16px" }}>
-                            {Object.keys(errors).length > 0 && <Alert sx={{ marginTop: 0 }} severity={errors.variant}>{errors.message}</Alert>}
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Entrar
-                        </Button>
+        <>
+            <Head>
+                <title>MIA Portal | Login</title>
+            </Head>
+            <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs" sx={{
+                    backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "64px auto"
+                }}>
+                    <CssBaseline />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            marginTop: '64px',
+                            backgroundColor: '#fff',
+                            borderRadius: '12px'
+                        }}
+                    >
+                        <img src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" alt="MIA Portal logo" />
+                        <Typography component="h1" variant="h5">
+                            MIA Portal
+                        </Typography>
+                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email"
+                                name="email"
+                                autoComplete="email"
+                                autoFocus
+                                onChange={(e) => {
+                                    setErrors({})
+                                    setEmail(e.target.value)
+                                }}
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Contraseña"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                onChange={(e) => {
+                                    setErrors({})
+                                    setPassword(e.target.value)
+                                }}
+                            />
+                            <Grid item xs={12} sx={{ height: '64px', marginTop: "16px" }}>
+                                {Object.keys(errors).length > 0 && <Alert sx={{ marginTop: 0 }} severity={errors.variant}>{errors.message}</Alert>}
+                            </Grid>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Entrar
+                            </Button>
+                        </Box>
                     </Box>
-                </Box>
 
-                <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
-                    <Link color="inherit" href="https://miaportal.com/">
-                        Mia Portal
-                    </Link>{' '}
-                    {new Date().getFullYear()}
-                    {'.'}
-                </Typography>
-            </Container>
-        </ThemeProvider>
+                    <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
+                        <Link color="inherit" href="https://miaportal.com/">
+                            Mia Portal
+                        </Link>{' '}
+                        {new Date().getFullYear()}
+                        {'.'}
+                    </Typography>
+                </Container>
+            </ThemeProvider>
+        </>
     );
 }
