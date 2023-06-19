@@ -48,7 +48,7 @@ const navigationOptionsList = [
         permissions: ['crear_usuario'],
         children: [
             {
-                id: 'registrarUsuario',
+                id: 'crear_usuario',
                 title: 'Registrar usuario',
                 permission: 'crear_usuario',
                 target: 'registrarUsuario',
@@ -61,21 +61,21 @@ const navigationOptionsList = [
         permissions: ['reporte_tipo_polen', 'reporte_diario', 'reporte_diario_meteorologico'],
         children: [
             {
-                id: 'tipo',
+                id: 'reporte_tipo_polen',
                 title: 'Por tipo',
                 permission: 'reporte_tipo_polen',
                 target: 'reportes',
                 icon: <ForestIcon />
             },
             {
-                id: 'diario',
+                id: 'reporte_diario',
                 title: 'Diario',
                 permission: 'reporte_diario',
                 target: 'reportes',
                 icon: <CalendarMonthIcon />
             },
             {
-                id: 'diario_met',
+                id: 'reporte_diario_meteorologico',
                 title: 'Diario + Meteorológico',
                 permission: 'reporte_diario_meteorologico',
                 target: 'reportes',
@@ -88,21 +88,21 @@ const navigationOptionsList = [
         permissions: ['reporte_paciente_sintomas_cronicos', 'reporte_paciente_entrada_diaria', 'reporte_paciente_test_prick'],
         children: [
             {
-                id: 'sintomas',
+                id: 'reporte_paciente_sintomas_cronicos',
                 title: 'Síntomas crónicos',
                 permission: 'reporte_paciente_sintomas_cronicos',
                 target: 'reportes',
                 icon: <MedicalInformationIcon />
             },
             {
-                id: 'entrada_diaria',
+                id: 'reporte_paciente_entrada_diaria',
                 title: 'Entrada diaria',
                 permission: 'reporte_paciente_entrada_diaria',
                 target: 'reportes',
                 icon: <MonitorHeartIcon />
             },
             {
-                id: 'test_prick',
+                id: 'reporte_paciente_test_prick',
                 title: 'Test Prick',
                 permission: 'reporte_paciente_test_prick',
                 target: 'reportes',
@@ -119,14 +119,14 @@ const checkPermissions = (arr1, arr2) => {
 
 export default function Navigator(props) {
     const router = useRouter();
-    const { onChangeMenuSelection, userAuth, ...other } = props;
-    const [activeItem, setActiveItem] = React.useState('');
+    const { onChangeMenuSelection, userAuth, selectedReport, ...other } = props;
+    const [activeItem, setActiveItem] = React.useState(selectedReport);
 
     const handleNavigation = (target, type = '') => {
         setActiveItem(type);
         const currentPath = router.pathname;
         if (`/${target}` !== currentPath) {
-            router.push(`/${target}${type && "?type="}${type ?? ""}`)
+            router.push(`/${target}${type && "?tipo="}${type ?? ""}`)
         } else {
             onChangeMenuSelection(type)
         }

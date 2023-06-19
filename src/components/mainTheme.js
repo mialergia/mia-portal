@@ -23,7 +23,7 @@ function Copyright() {
 
 const drawerWidth = 256;
 
-export default function MainTheme({ children, onChangeMenuSelection, title, userAuth, username }) {
+export default function MainTheme({ children, onChangeMenuSelection = () => {}, title, userAuth, username, selectedReport }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -47,6 +47,7 @@ export default function MainTheme({ children, onChangeMenuSelection, title, user
                             onClose={handleDrawerToggle}
                             onChangeMenuSelection={onChangeMenuSelection}
                             userAuth={userAuth}
+                            selectedReport={selectedReport}
                         />
                     )}
 
@@ -55,6 +56,7 @@ export default function MainTheme({ children, onChangeMenuSelection, title, user
                         sx={{ display: { sm: 'block', xs: 'none' } }}
                         onChangeMenuSelection={onChangeMenuSelection}
                         userAuth={userAuth}
+                        selectedReport={selectedReport}
                     />
                 </Box>
                 <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
