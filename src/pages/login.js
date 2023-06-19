@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import useUserAuth from '../hooks/useUserAuth';
 // import Image from 'next/Image';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -20,6 +20,7 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({})
+    const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
     const { userAuth } = useUserAuth();
@@ -43,6 +44,7 @@ export default function Login() {
         event.preventDefault();
 
         if (email && password) {
+            setIsLoading(true);
             await fetch("https://api.miaportal.fcien.edu.uy/users/login", {
                 method: 'POST',
                 headers: {
@@ -65,6 +67,8 @@ export default function Login() {
             }).catch(error => {
                 setErrors({ variant: 'error', message: 'No se pudo iniciar sesión. Intente nuevamente.' })
                 console.log('Error en fetch', error)
+            }).finally(() => {
+                setIsLoading(false);
             });
         } else {
             setErrors({ variant: 'warning', message: 'Debe ingresar el Email y la Contraseña' })
@@ -78,7 +82,7 @@ export default function Login() {
             </Head>
             <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="xs" sx={{
-                    backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "64px auto"
+                    backgroundColor: "#fff", borderRadius: "19px", padding: "24px", margin: "32px auto"
                 }}>
                     <CssBaseline />
                     <Box
@@ -92,7 +96,7 @@ export default function Login() {
                         }}
                     >
                         <img src="https://mialergia.fcien.edu.uy/assets/img/appIcon.png" width="120" height="120" alt="MIA Portal logo" />
-                        <Typography component="h1" variant="h5">
+                        <Typography component="h1" variant="h5" sx={{marginTop: '12px'}}>
                             MIA Portal
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -127,19 +131,20 @@ export default function Login() {
                             <Grid item xs={12} sx={{ height: '64px', marginTop: "16px" }}>
                                 {Object.keys(errors).length > 0 && <Alert sx={{ marginTop: 0 }} severity={errors.variant}>{errors.message}</Alert>}
                             </Grid>
-                            <Button
+                            <LoadingButton
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                sx={{ mt: 3, mb: 2, backgroundColor: '#2e7d32' }}
+                                loading={isLoading}
                             >
                                 Entrar
-                            </Button>
+                            </LoadingButton>
                         </Box>
                     </Box>
 
                     <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
-                        <Link color="inherit" href="https://miaportal.com/">
+                        <Link color="inherit" href="https://miaportal.fcien.edu.uy">
                             Mia Portal
                         </Link>{' '}
                         {new Date().getFullYear()}

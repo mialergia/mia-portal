@@ -13,7 +13,7 @@ import theme from '../components/theme';
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            <Link color="inherit" href="https://miaportal.com/">
+            <Link color="inherit" href="https://miaportal.fcien.edu.uy/">
                 MIA Portal
             </Link>{' '}
             {new Date().getFullYear()}.

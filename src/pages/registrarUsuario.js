@@ -15,8 +15,10 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText, Alert, Typog
 
 function RegistrarUsuario() {
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState('');
     const [passwordValidate, setPasswordValidate] = useState('')
+    const [passwordError, setPasswordError] = useState(false);
     const [role, setRole] = useState('');
     const [errors, setErrors] = useState({})
     const [isLoading, setIsLoading] = useState(false);
@@ -30,13 +32,14 @@ function RegistrarUsuario() {
         }
     }, [userAuth]);
 
-    useEffect(() => {
-        if (password && passwordValidate && (password !== passwordValidate)) {
-            setErrors({ variant: 'warning', message: 'Las contraseñas no coinciden' })
-        } else {
-            setErrors({})
-        }
-    }, [password, passwordValidate])
+    const validatePasswordConfirmation = (passwordConfirmation) => {
+        return password && passwordConfirmation && (password === passwordConfirmation)
+    }
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        return emailRegex.test(email);
+    };
 
 
     const handleSubmit = async (event) => {
@@ -106,10 +109,14 @@ function RegistrarUsuario() {
                                             label="Email"
                                             name="email"
                                             autoComplete="email"
+                                            type='email'
                                             onChange={(e) => {
-                                                setErrors({})
-                                                setEmail(e.target.value)
+                                                setErrors({});
+                                                setEmail(e.target.value);
+                                                validateEmail(e.target.value) ? setEmailError(false) : setEmailError(true)
                                             }}
+                                            error={emailError}
+                                            helperText={emailError ? 'Ingrese un correo electrónico válido' : ''}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -136,8 +143,11 @@ function RegistrarUsuario() {
                                             id="confirmPassword"
                                             autoComplete="confirm-password"
                                             onChange={(e) => {
-                                                setPasswordValidate(e.target.value)
+                                                setPasswordValidate(e.target.value);
+                                                validatePasswordConfirmation(e.target.value) ? setPasswordError(false) : setPasswordError(true);
                                             }}
+                                            helperText={passwordError ? 'Las contraseñas no coinciden' : ''}
+                                            error={passwordError}
                                         />
                                     </Grid>
 
@@ -170,7 +180,7 @@ function RegistrarUsuario() {
                                     fullWidth
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
-                                    disabled={!(email && password && passwordValidate && role && (password === passwordValidate))}
+                                    disabled={!(email && validateEmail(email) && password && passwordValidate && role && (password === passwordValidate))}
                                     loading={isLoading}
                                 >
                                     Crear

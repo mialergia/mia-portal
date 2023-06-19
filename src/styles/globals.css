@@ -10,13 +10,14 @@ body {
 button,
 [type='submit'] {
   -webkit-appearance: button;
-  background-color: #35A17A;
+  background-color: #2e7d32;
   background-image: none;
 }
 
 button,
 [type='submit']:hover {
-  background-color: #317F6D;
+  background-color: #2e7d32;
+  font-weight: 500;
 }
 
 .main-section {
