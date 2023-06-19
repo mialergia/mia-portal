@@ -13,7 +13,7 @@ import theme from '../components/theme';
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
-            <Link color="inherit" href="/">
+            <Link color="inherit" href="https://miaportal.fcien.edu.uy/">
                 MIA Portal
             </Link>{' '}
             {new Date().getFullYear()}.
@@ -23,7 +23,7 @@ function Copyright() {
 
 const drawerWidth = 256;
 
-export default function MainTheme({ children, onChangeMenuSelection, title, userAuth, username, selectedReport }) {
+export default function MainTheme({ children, onChangeMenuSelection = () => {}, title, userAuth, username, selectedReport }) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 

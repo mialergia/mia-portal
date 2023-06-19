@@ -15,20 +15,26 @@ const item = {
     py: '2px',
     px: 3,
     color: '#c8e6c9',
+    fontSize: '15px',
     '&:hover, &:focus': {
-        backgroundColor: '#2e7d32',
         color: '#fff',
+        backgroundColor: '#2e7d32'
     },
-    "&.Mui-selected": { backgroundColor: "#43a047", color: "#fff" },
-    "&.Mui-selected:hover": { backgroundColor: "#43a047"}
-
+    "&.Mui-selected": { 
+        backgroundColor: "#43a047", 
+        color: "#fff" 
+    },
+    "&.Mui-selected:hover": {
+        backgroundColor: "#43a047",
+    }
 };
 
 const itemCategory = {
     boxShadow: '0 -1px 0 rgb(255,255,255,0.1) inset',
     py: 1.5,
     px: 3,
-    color: '#c8e6c9'
+    color: '#c8e6c9',
+    fontSize: '15px'
 };
 
 const checkPermissions = (arr1, arr2) => {
@@ -38,7 +44,7 @@ const checkPermissions = (arr1, arr2) => {
 export default function Navigator(props) {
     const router = useRouter();
     const { onChangeMenuSelection, userAuth, selectedReport, ...other } = props;
-    const [activeItem, setActiveItem] = React.useState(selectedReport || 'reporte_tipo_polen');
+    const [activeItem, setActiveItem] = React.useState(selectedReport);
 
     const handleNavigation = (target, type = '') => {
         setActiveItem(type);
@@ -53,8 +59,8 @@ export default function Navigator(props) {
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
-                <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff', fontWeight: 600, justifyContent: 'space-evenly', backgroundColor: '#2e7d32' }} className='main_title'>
-                    <img src="../../appIcon.png" width="32px"></img>
+                <ListItem sx={{ ...item, ...itemCategory, fontSize: 23, color: '#fff', fontWeight: 600, justifyContent: 'space-evenly' }}>
+                    <img src='../appIcon.png' width="32px"/>
                     MIA Portal
                 </ListItem>
 

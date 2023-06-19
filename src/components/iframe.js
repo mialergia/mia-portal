@@ -3,7 +3,7 @@
 const Iframe = ({ iframeSrc }) => {
 
     return (
-        <div className="iframe-container">
+        <div>
             <iframe
                 id="reports-iframe"
                 className="reports-iframe"

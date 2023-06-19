@@ -5,7 +5,7 @@ import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import LoadingButton from '@mui/lab/LoadingButton';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';;
 import Grid from '@mui/material/Grid';
@@ -15,10 +15,13 @@ import { FormControl, InputLabel, Select, MenuItem, FormHelperText, Alert, Typog
 
 function RegistrarUsuario() {
     const [email, setEmail] = useState('');
+    const [emailError, setEmailError] = useState(false);
     const [password, setPassword] = useState('');
     const [passwordValidate, setPasswordValidate] = useState('')
+    const [passwordError, setPasswordError] = useState(false);
     const [role, setRole] = useState('');
     const [errors, setErrors] = useState({})
+    const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
     const { userAuth, username } = useUserAuth();
@@ -29,19 +32,20 @@ function RegistrarUsuario() {
         }
     }, [userAuth]);
 
-    useEffect(() => {
-        if (password && passwordValidate && (password !== passwordValidate)) {
-            setErrors({ variant: 'warning', message: 'Las contraseñas no coinciden' })
-        } else {
-            setErrors({})
-        }
-    }, [password, passwordValidate])
+    const validatePasswordConfirmation = (passwordConfirmation) => {
+        return password && passwordConfirmation && (password === passwordConfirmation)
+    }
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        return emailRegex.test(email);
+    };
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (email && password && (password === passwordValidate)) {
-
+            setIsLoading(true);
             setErrors({})
             // setLoading(true);
             await fetch("https://api.miaportal.fcien.edu.uy/users/create", {
@@ -67,7 +71,7 @@ function RegistrarUsuario() {
                 setErrors({ variant: 'error', message: 'No se pudo crear el usuario. Intente nuevamente.' })
                 console.log('Error en fetch', error)
             }).finally(() => {
-                // setLoading(false);
+                setIsLoading(false);
             });
         } else {
             setErrors({ variant: 'warning', message: 'Debe ingresar el Email y la Contraseña' })
@@ -105,10 +109,14 @@ function RegistrarUsuario() {
                                             label="Email"
                                             name="email"
                                             autoComplete="email"
+                                            type='email'
                                             onChange={(e) => {
-                                                setErrors({})
-                                                setEmail(e.target.value)
+                                                setErrors({});
+                                                setEmail(e.target.value);
+                                                validateEmail(e.target.value) ? setEmailError(false) : setEmailError(true)
                                             }}
+                                            error={emailError}
+                                            helperText={emailError ? 'Ingrese un correo electrónico válido' : ''}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -135,8 +143,11 @@ function RegistrarUsuario() {
                                             id="confirmPassword"
                                             autoComplete="confirm-password"
                                             onChange={(e) => {
-                                                setPasswordValidate(e.target.value)
+                                                setPasswordValidate(e.target.value);
+                                                validatePasswordConfirmation(e.target.value) ? setPasswordError(false) : setPasswordError(true);
                                             }}
+                                            helperText={passwordError ? 'Las contraseñas no coinciden' : ''}
+                                            error={passwordError}
                                         />
                                     </Grid>
 
@@ -164,15 +175,16 @@ function RegistrarUsuario() {
 
                                 </Grid>
 
-                                <Button
+                                <LoadingButton
                                     type="submit"
                                     fullWidth
                                     variant="contained"
                                     sx={{ mt: 3, mb: 2 }}
-                                    disabled={!(email && password && passwordValidate && role && (password === passwordValidate))}
+                                    disabled={!(email && validateEmail(email) && password && passwordValidate && role && (password === passwordValidate))}
+                                    loading={isLoading}
                                 >
                                     Crear
-                                </Button>
+                                </LoadingButton>
 
                             </Box>
                         </Box>

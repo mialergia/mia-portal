@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+import Head from 'next/head'
 import useUserAuth from '../hooks/useUserAuth';
 import MainTheme from '../components/mainTheme'
 import Iframe from '../components/iframe'
